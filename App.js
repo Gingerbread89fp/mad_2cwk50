@@ -14,8 +14,8 @@ class Login extends Component{
   }
 
 
-  getLogin(){
-    return fetch('URL/login')
+  getHomePage(){
+    /* return fetch('URL/login')
     .then((response) => response.json())
     .then((responseJson) =>{ 
       this.setState({
@@ -23,11 +23,28 @@ class Login extends Component{
         password: this.state.password
       })
     })
-    .catch((error)=>{console.log(error)})
+    .catch((error)=>{console.log(error)}) */
   }
 
-  render(){
+  sendloginCredential(){
+    return fetch('URL/login', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json", 'Accept': 'application/json', },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    })
+    .then((response) => {
+      Alert.alert("Logged in successfully ")
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
 
+
+  render(){
     return(
       <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
 
@@ -48,7 +65,7 @@ class Login extends Component{
         
         <Button 
           style={styles.button_style} 
-          onPress={()=> this.getLogin()} 
+          onPress={()=> this.sendloginCredential()} 
           title='Login'/>
         
         <Text>Register now</Text>
