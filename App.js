@@ -1,48 +1,14 @@
 import React, { Component } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  Image,
-  StatusBar,
-  TextInput,
-} from 'react-native';
+import { View, Text, Image, TextInput } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const styles = StyleSheet.create({
-  input:{
-    borderColor: 'gray',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    padding: 2,
-    width: 300
-  },
-
-  image:{
-    width: 256, 
-    height: 256, 
-    borderRadius: 100, 
-    borderWidth: 1,
-    borderColor: 'gray',
-    marginTop: 20,
-    marginBottom: 20
-  }
-})
+import Button from './app_components/button'
+import styles from './styles/app_style'
 
 class Login extends Component{
   constructor(props){
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: ''
     }
   }
@@ -52,8 +18,11 @@ class Login extends Component{
     return fetch('URL/login')
     .then((response) => response.json())
     .then((responseJson) =>{ 
-      this.setState
+      this.setState({
+        email: this.state.email,
+        password: this.state.password
       })
+    })
     .catch((error)=>{console.log(error)})
   }
 
@@ -64,15 +33,24 @@ class Login extends Component{
 
         <Image style={styles.image}></Image>
 
-        <Text>User name:</Text>
-        <TextInput style={styles.input} 
-          value={this.state.username} 
-          onChangeText={(username)=>this.setState(username)}/>
+        <Text style={styles.label}>Email:</Text>
+        <TextInput 
+          style={styles.input} 
+          value={this.state.email} 
+          onChangeText={(email)=>this.setState({email})}/>
 
-        <Text>Password:</Text>
-        <TextInput style={styles.input} value={this.state.password}/>
-
-        <Text>Log-in</Text>
+        <Text style={styles.label}>Password:</Text>
+        <TextInput 
+          style={styles.input} 
+          value={this.state.password}
+          onChangeText={(password) => this.setState({password})}
+          secureTextEntry={true}/>
+        
+        <Button 
+          style={styles.button_style} 
+          onPress={()=> this.getLogin()} 
+          title='Login'/>
+        
         <Text>Register now</Text>
 
       </View>
