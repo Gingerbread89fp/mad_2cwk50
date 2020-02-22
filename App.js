@@ -1,82 +1,24 @@
-import React, { Component } from 'react';
-import { View, Text, Image, TextInput } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import Button from './app_components/button'
-import styles from './styles/app_style'
 
-class Login extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
-    }
+import Home from './screens/Home';
+import Login from './screens/Login';
+import Search from './screens/Search';
+
+const AppNavigator = createStackNavigator({
+  Splash: {
+    screen: Login
+  },
+  Home: {
+    screen: Home
+  },
+  Search: {
+    screen: Search
   }
+});
+
+const AppContainer = createAppContainer(AppNavigator);
 
 
-  getHomePage(){
-    /* return fetch('URL/login')
-    .then((response) => response.json())
-    .then((responseJson) =>{ 
-      this.setState({
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-    .catch((error)=>{console.log(error)}) */
-  }
-
-  sendloginCredential(){
-    return fetch('URL/login', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json", 'Accept': 'application/json', },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-    .then((response) => {
-      Alert.alert("Logged in successfully ")
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-  }
-
-
-  render(){
-    return(
-      <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
-
-        <Image style={styles.image}></Image>
-
-        <Text style={styles.label}>Email:</Text>
-        <TextInput 
-          style={styles.input} 
-          value={this.state.email} 
-          onChangeText={(email)=>this.setState({email})}/>
-
-        <Text style={styles.label}>Password:</Text>
-        <TextInput 
-          style={styles.input} 
-          value={this.state.password}
-          onChangeText={(password) => this.setState({password})}
-          secureTextEntry={true}/>
-        
-        <Button 
-          style={styles.button_style} 
-          onPress={()=> this.sendloginCredential()} 
-          title='Login'/>
-        
-        <Text>Register now</Text>
-
-      </View>
-    )
-
-  }
-
-
-
-}
-
-export default Login;
+export default AppContainer;
