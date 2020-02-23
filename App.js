@@ -9,6 +9,7 @@ import Register from './screens/Register';
 import Home from './screens/Home';
 import Search from './screens/Search';
 import Profile from './screens/Profile';
+import NewChits from './screens/NewChits';
 
 const AppNavigator = createStackNavigator({
   Login: {
@@ -29,7 +30,14 @@ const AppNavigator = createStackNavigator({
         screen: Search
       },
       Home: {
-        screen: Home
+        screen: createStackNavigator({
+          Home: {
+            screen: Home
+          },
+          NewChits: {
+            screen: NewChits
+          }
+        })
       },
       Profile: {
         screen: Profile
