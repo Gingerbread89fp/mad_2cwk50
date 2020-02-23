@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput } from 'react-native';
+import { View, Text, Image, TextInput, Alert, TouchableOpacity } from 'react-native';
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-
-import CustomButton from '../app_components/button'
 import styles from '../styles/app_style'
 
 class Login extends Component{
@@ -16,21 +12,8 @@ class Login extends Component{
     }
   }
 
-
-  getHomePage(){
-    /* return fetch('URL/login')
-    .then((response) => response.json())
-    .then((responseJson) =>{ 
-      this.setState({
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-    .catch((error)=>{console.log(error)}) */
-  }
-
-  sendloginCredential(){
-    return fetch('URL/login', {
+  login(){
+    return fetch('http://10.0.2.2:3333/api/v0.0.5/login', {
       method: 'POST',
       headers: { "Content-Type": "application/json", 'Accept': 'application/json', },
       body: JSON.stringify({
@@ -41,6 +24,7 @@ class Login extends Component{
     .then((response) => {
       Alert.alert("Logged in successfully ")
     })
+    .then((response)=> this.props.navigation.navigate('Home'))
     .catch((error)=>{
       console.log(error)
     })
@@ -69,10 +53,11 @@ class Login extends Component{
           onChangeText={(password) => this.setState({password})}
           secureTextEntry={true}/>
         
-        <CustomButton 
+        <TouchableOpacity 
           style={styles.button_style} 
-          onPress={()=> this.props.navigation.navigate('Home')} 
-          title='Login'/>
+          onPress={()=> this.login()}>
+            <Text>LOGIN</Text>
+        </TouchableOpacity>
         
         <Text onPress={()=> this.props.navigation.navigate('Register')} >Register now</Text>
 
