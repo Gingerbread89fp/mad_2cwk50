@@ -1,35 +1,34 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput } from 'react-native';
+import { View, Text, TextInput, Alert, TouchableOpacity } from 'react-native';
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-
-import CustomButton from '../app_components/button'
 import styles from '../styles/app_style'
 
 class Register extends Component{
   constructor(props){
     super(props);
     this.state = {
-        name: '',
-        lastname: '',
+        given_name: '',
+        family_name: '',
         email: '',
         password: ''
     }
   }
 
   register(){
-    return fetch('URL/user', {
+    return fetch('http://10.0.2.2:3333/api/v0.0.5/user', {
       method: 'POST',
       headers: { "Content-Type": "application/json", 'Accept': 'application/json', },
       body: JSON.stringify({
+        given_name: this.state.given_name,
+        family_name: this.state.family_name,
         email: this.state.email,
         password: this.state.password
       })
     })
     .then((response) => {
-      Alert.alert("Logged in successfully ")
+      Alert.alert("Registered successfully")
     })
+    .then((response) => { this.props.navigation.navigate('Login')})
     .catch((error)=>{
       console.log(error)
     })
@@ -42,15 +41,15 @@ class Register extends Component{
         <Text style={styles.label}>Name:</Text>
         <TextInput 
           style={styles.input} 
-          value={this.state.name} 
-          onChangeText={(name)=>this.setState({name})}/>
+          value={this.state.given_name} 
+          onChangeText={(given_name)=>this.setState({given_name})}/>
 
 
         <Text style={styles.label}>Last Name:</Text>
         <TextInput 
           style={styles.input} 
-          value={this.state.lastname} 
-          onChangeText={(lastname)=>this.setState({lastname})}/>
+          value={this.state.family_name} 
+          onChangeText={(family_name)=>this.setState({family_name})}/>
 
         <Text style={styles.label}>Email:</Text>
         <TextInput 
@@ -65,10 +64,11 @@ class Register extends Component{
           onChangeText={(password) => this.setState({password})}
           secureTextEntry={true}/>
         
-        <CustomButton 
+        <TouchableOpacity
           style={styles.button_style} 
-          onPress={()=> this.register()} 
-          title='Signup'/>
+          onPress={()=> this.register()}>
+              <Text>Signup</Text>
+        </TouchableOpacity>
 
       </View>
     )
