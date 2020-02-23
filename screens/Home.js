@@ -16,11 +16,12 @@ class Home extends Component{
             <View>
                 <Text>Home page</Text>
                 <View style={styles.page_container}>
-                    <Text>CONTENT</Text>
-                    <Text>fdklhjgkljhkdgjhkdflnbjkahgietlnbkdfjhgitejbiwREUYETHSFG</Text>
-                </View>
-                <View>
-                    <Text>fdklhjgkljhkdgjhkdflnbjkahgietlnbkdfjhgitejbiwREUYETHSFG</Text>
+                    <View>
+                        <Text>CONTENT</Text>
+                    </View>
+                    <View>
+                        <Text>Text</Text>
+                    </View>
                 </View>
             </View>
         )

@@ -30,13 +30,9 @@ class Login extends Component{
     })
   }
 
-  static navigationOptions = {
-    header:null,
-  }
-
   render(){
     return(
-      <View style={{flex:1, flexDirection:'column', alignItems:'center'}}>
+      <View style={{flex:1, flexDirection:'column', alignItems:'center', backgroundColor:''}}>
 
         <Image style={styles.image}></Image>
 

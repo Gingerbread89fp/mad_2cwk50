@@ -3,7 +3,7 @@ import { TouchableOpacity, View, Text } from 'react-native';
 
 import PropTypes from 'prop-types';
 
-export default class Button extends Component{
+export default class CustomButton extends Component{
     constructor(props){
         super(props);
     }
@@ -18,4 +18,4 @@ export default class Button extends Component{
     }  
 }
 
-Button.propTypes = {title: PropTypes.string.isRequired, onPress: PropTypes.func.isRequired}
+CustomButton.propTypes = {title: PropTypes.string.isRequired, onPress: PropTypes.func.isRequired}

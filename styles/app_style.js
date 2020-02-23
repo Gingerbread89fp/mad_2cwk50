@@ -2,13 +2,15 @@ import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
     button_style:{
-        backgroundColor: 'lightblue',
+        backgroundColor: 'lightgreen',
         borderWidth:2,
-        borderColor: 'blue',
-        height: 30,
-        width: 40,
-        justifyContent: 'center',
-        marginBottom: 30
+        borderColor: 'green',
+        height: 32,
+        width: 128,
+        justifyContent:'center',
+        alignItems: 'center',
+        marginBottom: 30,
+        textDecorationColor:'black'
     },
 
     input:{
@@ -21,8 +23,8 @@ export default styles = StyleSheet.create({
     },
     
     image:{
-        width: 256, 
-        height: 256, 
+        width: 180, 
+        height: 180, 
         borderRadius: 150, 
         borderWidth: 1,
         borderColor: 'gray',
@@ -34,8 +36,12 @@ export default styles = StyleSheet.create({
         fontSize: 16,
         fontWeight:'bold'
     },
-    
+
     page_container: {
-        height: 150
+        alignItems:'stretch',
+        alignContent:'space-between',
+        flexDirection:'row',
+        backgroundColor: 'pink',
+        height:500
     }
 })

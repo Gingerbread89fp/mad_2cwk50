@@ -5,38 +5,40 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 //import BottomNavigation from './screens/ScreenNavigation';
 import Login from './screens/Login';
+import Register from './screens/Register';
 import Home from './screens/Home';
 import Search from './screens/Search';
 import Profile from './screens/Profile';
 
 const AppNavigator = createStackNavigator({
   Login: {
-    screen: Login
+    screen: Login,
+    navigationOptions: () => ({
+      header: null,
+    })
+  },
+  Register: {
+    screen: Register,
+    navigationOptions: () => ({
+      title: 'Registration page',
+    })
   },
   Home: {
     screen: createBottomTabNavigator({
       Search: {
-        screen: Search,
-        BottomTabNavigatorConfig:{
-          tabBarOptions: {
-            activeTintColor: '#e91e63',
-            labelStyle: {
-              fontSize: 12,
-            },
-            style: {
-              backgroundColor: 'blue',
-            },
-          }
-        }
+        screen: Search
       },
       Home: {
-        screen: Home,
-        order:1
+        screen: Home
       },
       Profile: {
         screen: Profile
       }
-    })
+    }),
+    navigationOptions: () => ({
+      header: null,
+
+    }),
   }
 });
 
