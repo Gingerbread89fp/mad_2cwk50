@@ -8,7 +8,9 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      token: '',
+      id: ''
     }
   }
 
@@ -21,7 +23,15 @@ class Login extends Component {
         password: this.state.password,
       })
     })
-    .then((response) => {Alert.alert("Logged in successfully ")})
+    .then((response) => response.json())
+    .then((responseJson) => {
+        this.setState({
+            id: responseJson.id,
+            token: responseJson.token
+        });
+        console.log('**** DEBUG: ', this.state.token);
+    })
+    .then((response) => {Alert.alert("Logged in successfully")})
     .then((response) => this.props.navigation.navigate('Home'))
     .catch((error) => {
       console.log(error)
