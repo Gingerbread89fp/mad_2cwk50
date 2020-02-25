@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TextInput, Alert, TouchableOpacity } from 'react-native';
-
+import AsyncStorage from '@react-native-community/async-storage'
 import styles from '../styles/app_style'
 
 class Login extends Component {
@@ -29,7 +29,8 @@ class Login extends Component {
             id: responseJson.id,
             token: responseJson.token
         });
-        console.log('**** DEBUG: ', this.state.token);
+        AsyncStorage.setItem('token', JSON.stringify(responseJson.token));
+        AsyncStorage.setItem('userId', JSON.stringify(responseJson.id))
     })
     .then((response) => {Alert.alert("Logged in successfully")})
     .then((response) => this.props.navigation.navigate('Home'))
