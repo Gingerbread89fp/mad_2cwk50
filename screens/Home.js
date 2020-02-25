@@ -9,30 +9,7 @@ class Home extends Component {
         super(props);
         this.state = {
             chitsList: [],
-            id: '',
-            token: '',
-            chit_id: '',
-            timestamp: '',
-            chit_content: '',
-            user_id: '',
-            given_name: '',
-            family_name: '',
-            email: ''
         }
-      }
-
-    getToken() {
-        return fetch('http://10.0.2.2:3333/api/v0.0.5/login')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    id: responseJson.id,
-                    token: responseJson.token
-                });
-            })
-            .catch((error) => {
-                console.log(error)
-            })
     }
 
     getChits() {

@@ -35,18 +35,20 @@ const AppNavigator = createStackNavigator({
             screen: Home
           },
           NewChits: {
-            screen: NewChits
+            screen: NewChits,
+            navigationOptions: () => ({
+              title: 'New Chit',
+            })
           }
         })
       },
       Profile: {
         screen: Profile
-      }
+      },
     }),
     navigationOptions: () => ({
-      header: null,
-
-    }),
+      header: null
+    })
   }
 });
 
