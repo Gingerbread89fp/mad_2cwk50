@@ -9,7 +9,6 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      token: '',
       id: ''
     }
   }
@@ -34,9 +33,27 @@ class Login extends Component {
     })
     .then((response) => {Alert.alert("Logged in successfully")})
     .then((response) => this.props.navigation.navigate('Home'))
+    .then((response) => this.getUserDetails())
     .catch((error) => {
       console.log(error)
     })
+  }
+
+  getUserDetails(){
+    return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.id)
+    .then((response) => response.json())
+        .then((responseJson) => {
+            this.setState({
+                id: id,
+                given_name: responseJson.given_name,
+                family_name: responseJson.family_name,
+                email: responseJson.email
+            });
+            AsyncStorage.setItem('user', JSON.stringify(responseJson));
+        })
+        .catch((error) => {
+            console.log(error)
+        })
   }
 
   render() {
