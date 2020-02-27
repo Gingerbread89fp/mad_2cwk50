@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
         width: 128,
         justifyContent:'center',
         alignItems: 'center',
-        marginBottom: 30,
+        marginHorizontal: 30,
         textDecorationColor:'black'
     },
 
@@ -33,24 +33,41 @@ export default styles = StyleSheet.create({
     },
 
     icon_home:{
-        marginRight: 20,     
+        marginHorizontal: 8,     
     },
 
-    //Login page and names in Home
+    //Login page and names in Home + Search
     label: {
         fontSize: 16,
         fontWeight:'bold'
     },
+    
+    page_title:{
+        fontSize: 32,
+        fontWeight:'bold',
+        flex:1
+    },
 
     page_container: {
-        alignItems:'stretch',
         alignContent:'space-between',
         flexDirection:'row',
-        backgroundColor: 'pink',
-        height:500
+        marginHorizontal:8,
+        marginVertical:8
     },
+    page_content: {
+        alignContent:'space-between',
+        alignItems:'center',
+        flexDirection:'row',
+        marginVertical:8
+    },
+
+    avatar:{
+        marginRight: 8
+    },
+
     chit_layout:{
-        borderColor: 'gray',
+        backgroundColor:'white',
+        borderColor: 'green',
         borderStyle: 'solid',
         borderWidth: 1,
         borderRadius: 2,

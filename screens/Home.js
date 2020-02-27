@@ -48,14 +48,16 @@ class Home extends Component {
     render() {
         return (
             <View>
+                <View style={styles.page_container}>
+                    <Text style={styles.page_title}>Chittr</Text>
 
-
-                <CustomIcon
-                    name={'md-chatboxes'}
-                    size={40}
-                    color={'green'}
-                    onPress={() => this.props.navigation.navigate('NewChits')}
-                />
+                    <CustomIcon
+                        name={'md-chatboxes'}
+                        size={40}
+                        color={'green'}
+                        onPress={() => this.props.navigation.navigate('NewChits')}
+                    />
+                </View>
                 
                 <View>
                     <FlatList

@@ -30,5 +30,5 @@ CustomIcon.propTypes = {
   name: PropTypes.string.isRequired, 
   size: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func
 }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert, FlatList } from 'react-native';
 import { Avatar, SearchBar } from "react-native-elements";
 
+import CustomIcon from '../app_components/customizedComponents';
+
 class Search extends Component{
 
     constructor(props) {
@@ -40,13 +42,15 @@ class Search extends Component{
 
     displayData(item){
         return(
-            <View>
+            <View style={styles.page_content}>
                 <Avatar
-                size='medium'
-                rounded
-                icon={{name:'user', type: 'font-awesome'}} 
-                containerStyle={{flex: 2, marginLeft: 20}}/>
-                <Text>{item.given_name} {item.family_name}</Text>
+                    size='medium'
+                    rounded
+                    icon={{name:'user', type: 'font-awesome'}}
+                    style={styles.avatar} 
+                />
+                <CustomIcon name={'md-person'} size={36} color={'green'} />
+                <Text style={styles.label}>{item.given_name} {item.family_name}</Text>
                 <TouchableOpacity
                     style={styles.button_style}
                     onPress={() => this.followUser()}>
@@ -59,16 +63,19 @@ class Search extends Component{
     render(){
         return(
             <View>
-                <SearchBar
-                    lightTheme
-                    value={this.state.given_name}
-                    onChangeText={(given_name) => this.setState({ given_name })} />
 
-                <TouchableOpacity
-                    style={styles.button_style}
-                    onPress={() => this.searchUsers()}>
-                    <Text>SEARCH</Text>
-                </TouchableOpacity>
+                <View style={styles.page_container}>
+                    <Text style={styles.page_title}>Search</Text>
+                </View>
+
+                <View style={styles.page_container}>
+                    <TextInput
+                        style={styles.input}
+                        value={this.state.given_name}
+                        onChangeText={(given_name) => this.setState({ given_name })} />
+                    <CustomIcon name={'md-search'} size={36} color={'green'} onPress={() => this.searchUsers()}/>
+                </View>
+                
 
                 <View>
                     <FlatList
