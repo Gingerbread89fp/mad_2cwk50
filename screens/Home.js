@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 //import Icon from 'react-native-vector-icons/Ionicons';  
 
 import CustomIcon from '../app_components/customizedComponents';
@@ -15,9 +15,19 @@ class Home extends Component {
         }
     }
 
-    static navigationOptions = {
-        header: null
-    };
+    static navigationOptions = ({navigation}) => ({
+        title: 'Chittr',
+        headerTitleStyle: styles.page_title,
+        headerStyle: {height: 64, marginBottom: 12},
+        headerRight:() =>(
+            <CustomIcon
+                name={'md-chatboxes'}
+                size={40}
+                color={'green'}
+                onPress={() => navigation.navigate('NewChits')}
+            />
+        )
+    });
 
     getChits() {
         return fetch('http://10.0.2.2:3333/api/v0.0.5/chits')
@@ -47,25 +57,12 @@ class Home extends Component {
 
     render() {
         return (
-            <View>
-                <View style={styles.page_container}>
-                    <Text style={styles.page_title}>Chittr</Text>
-
-                    <CustomIcon
-                        name={'md-chatboxes'}
-                        size={40}
-                        color={'green'}
-                        onPress={() => this.props.navigation.navigate('NewChits')}
-                    />
-                </View>
-                
-                <View>
-                    <FlatList
-                        data={this.state.chitsList}
-                        renderItem={({ item, index }) => this.displayData(item, index)}
-                        keyExtractor={({ id }, index) => id}
-                    />
-                </View>
+            <View>       
+                <FlatList
+                    data={this.state.chitsList}
+                    renderItem={({ item, index }) => this.displayData(item, index)}
+                    keyExtractor={({ id }, index) => id}
+                />
             </View>
         )
     }
