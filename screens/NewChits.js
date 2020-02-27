@@ -10,12 +10,7 @@ class NewChits extends Component {
         super(props);
         this.state = {
             token: '',
-            //timestamp: '',
-            chit_content: '',
-            user_id: '',
-            given_name: '',
-            family_name: '',
-            email: ''
+            chit_content: ''
         }
     }
 
@@ -32,13 +27,7 @@ class NewChits extends Component {
             },
             body: JSON.stringify({
                 timestamp: 0,
-                chit_content: this.state.chit_content,
-                /* user: {
-                    user_id: this.state.user_id,
-                    given_name: this.state.given_name,
-                    family_name: this.state.family_name,
-                    email: this.state.email
-                } */
+                chit_content: this.state.chit_content
             })
             
         })
