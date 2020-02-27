@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import CustomIcon from '../app_components/customizedComponents';
 
@@ -10,7 +11,8 @@ class Profile extends Component {
   logout() {
     return fetch('http://10.0.2.2:3333/api/v0.0.5/logout')
       .then((response) => {
-        Alert.alert("Logged out successfully ")
+        Alert.alert("Logged out successfully ");
+        AsyncStorage.clear()
       })
       .then((response) => this.props.navigation.navigate('Login'))
       .catch((error) => {
