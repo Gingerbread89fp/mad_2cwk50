@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, View, TextInput } from 'react-native';
+import { TouchableOpacity, Text, View, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 
 import styles from '../styles/app_style'
@@ -24,16 +24,6 @@ class NewChits extends Component {
       }
 
     postChits(){
-        AsyncStorage.getItem('user', (err, result) =>{
-            let user = JSON.parse(result)
-            this.setState({
-                user_id: user.user_id,
-                given_name: user.given_name,
-                family_name: user.family_name,
-                email: user.email
-            });
-            console.log('DEBUG: ' + this.state.email)
-        });
         return fetch('http://10.0.2.2:3333/api/v0.0.5/chits', {
             method: 'POST',
             headers: { 
@@ -41,19 +31,20 @@ class NewChits extends Component {
                 "X-Authorization": JSON.parse(this.state.token)
             },
             body: JSON.stringify({
-                //timestamp: parseInt(this.state.timestamp),
+                timestamp: 0,
                 chit_content: this.state.chit_content,
-                user: {
+                /* user: {
+                    user_id: this.state.user_id,
                     given_name: this.state.given_name,
                     family_name: this.state.family_name,
                     email: this.state.email
-                }
+                } */
             })
             
         })
-        .then((response) => this.props.navigation.navigate('HomePage'))
+        .then((response) => this.props.navigation.navigate('Home'))
         .catch((error) => {
-        console.log(error)
+            console.log(error)
         })
     }
 
@@ -70,9 +61,12 @@ class NewChits extends Component {
                 <TouchableOpacity
                     style={styles.button_style}
                     onPress={() => AsyncStorage.getItem('token', (err, result) =>{
-                        this.setState({ token: result });
-                        this.postChits();
-                        console.log('DEBUG TOKEN: ', result)
+                        if(result !=null){
+                            this.setState({ token: result });
+                            this.postChits();
+                            console.log('DEBUG TOKEN: ', result)
+                        }
+                        else{Alert.alert("Please login to post chits")}
                     })}>
                     <Text>POST CHITS</Text>
                 </TouchableOpacity>
