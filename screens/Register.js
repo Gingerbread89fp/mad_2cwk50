@@ -14,6 +14,10 @@ class Register extends Component{
     }
   }
 
+  static navigationOptions={
+    title: 'Registration page',
+  }
+
   register(){
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user', {
       method: 'POST',

@@ -32,6 +32,11 @@ export default styles = StyleSheet.create({
         marginBottom: 20
     },
 
+    icon_home:{
+        marginRight: 20,     
+    },
+
+    //Login page and names in Home
     label: {
         fontSize: 16,
         fontWeight:'bold'
@@ -43,5 +48,15 @@ export default styles = StyleSheet.create({
         flexDirection:'row',
         backgroundColor: 'pink',
         height:500
+    },
+    chit_layout:{
+        borderColor: 'gray',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderRadius: 2,
+        padding: 10,
+        marginBottom: 8,
+        marginHorizontal: 6,
+        elevation:1
     }
 })

@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, FlatList, Text, View } from 'react-native';
+//import Icon from 'react-native-vector-icons/Ionicons';  
+
+import CustomIcon from '../app_components/customizedComponents';
 
 import styles from '../styles/app_style'
 
 class Home extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             chitsList: [],
         }
     }
 
+    static navigationOptions = {
+        header: null
+    };
+
     getChits() {
         return fetch('http://10.0.2.2:3333/api/v0.0.5/chits')
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    isLoading: false,
                     chitsList: responseJson
                 });
             })
@@ -26,33 +32,36 @@ class Home extends Component {
             })
     }
 
-    displayData(item){
-        return(
-            <View>
-                <Text>{item.user.given_name}</Text>
+    displayData(item) {
+        return (
+            <View style={styles.chit_layout}>
+                <Text style={styles.label}>{item.user.given_name}</Text>
                 <Text>{item.chit_content}</Text>
             </View>
         )
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getChits();
     }
 
     render() {
         return (
             <View>
-                <TouchableOpacity
-                    style={styles.button_style}
-                    onPress={() => this.props.navigation.navigate('NewChits')}>
-                    <Text>NEW CHIT</Text>
-                </TouchableOpacity>
 
+
+                <CustomIcon
+                    name={'md-chatboxes'}
+                    size={40}
+                    color={'green'}
+                    onPress={() => this.props.navigation.navigate('NewChits')}
+                />
+                
                 <View>
                     <FlatList
-                    data = {this.state.chitsList}
-                    renderItem={({item, index}) => this.displayData(item, index)}
-                    keyExtractor={({id}, index) => id}
+                        data={this.state.chitsList}
+                        renderItem={({ item, index }) => this.displayData(item, index)}
+                        keyExtractor={({ id }, index) => id}
                     />
                 </View>
             </View>

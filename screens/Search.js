@@ -45,8 +45,8 @@ class Search extends Component{
                 size='medium'
                 rounded
                 icon={{name:'user', type: 'font-awesome'}} 
-                containerStyle={{flex: 2, marginLeft: 20, marginTop: 115}}/>
-                <Text>{item.given_name}, {item.family_name}</Text>
+                containerStyle={{flex: 2, marginLeft: 20}}/>
+                <Text>{item.given_name} {item.family_name}</Text>
                 <TouchableOpacity
                     style={styles.button_style}
                     onPress={() => this.followUser()}>
@@ -60,7 +60,7 @@ class Search extends Component{
         return(
             <View>
                 <SearchBar
-                    style={styles.input}
+                    lightTheme
                     value={this.state.given_name}
                     onChangeText={(given_name) => this.setState({ given_name })} />
 
@@ -74,7 +74,7 @@ class Search extends Component{
                     <FlatList
                     data = {this.state.userList}
                     renderItem={({item, index}) => this.displayData(item, index)}
-                    keyExtractor={({user_id}, index) => user_id}
+                    keyExtractor={({given_name}, index) => given_name}
                     />
                 </View>
 

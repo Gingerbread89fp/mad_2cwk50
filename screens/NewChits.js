@@ -19,6 +19,10 @@ class NewChits extends Component {
         }
     }
 
+    static navigationOptions= {
+        title: 'New Chit'
+      }
+
     postChits(){
         AsyncStorage.getItem('user', (err, result) =>{
             let user = JSON.parse(result)

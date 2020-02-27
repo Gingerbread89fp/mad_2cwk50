@@ -1,9 +1,8 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-
-//import BottomNavigation from './screens/ScreenNavigation';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import Home from './screens/Home';
@@ -12,39 +11,21 @@ import Profile from './screens/Profile';
 import NewChits from './screens/NewChits';
 
 const AppNavigator = createStackNavigator({
-  Login: {
-    screen: Login,
-    navigationOptions: () => ({
-      header: null,
-    })
-  },
-  Register: {
-    screen: Register,
-    navigationOptions: () => ({
-      title: 'Registration page',
-    })
-  },
+  /*Login,
+  Register,*/
   Home: {
     screen: createBottomTabNavigator({
-      Search: {
-        screen: Search
-      },
+      Search,
       Home: {
         screen: createStackNavigator({
-          Home: {
-            screen: Home
-          },
-          NewChits: {
-            screen: NewChits,
-            navigationOptions: () => ({
-              title: 'New Chit',
-            })
-          }
+          Home,
+          NewChits
         })
       },
-      Profile: {
-        screen: Profile
-      },
+      Profile
+    }, 
+    {
+      initialRouteName: 'Home'
     }),
     navigationOptions: () => ({
       header: null
