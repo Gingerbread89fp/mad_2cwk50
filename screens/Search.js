@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert, FlatList } from 'react-native';
-import { Avatar, SearchBar } from "react-native-elements";
+import { Avatar } from "react-native-elements";
 
 import CustomIcon from '../app_components/customizedComponents';
 

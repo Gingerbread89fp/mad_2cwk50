@@ -31,6 +31,16 @@ export default styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20
     },
+    image_profile:{
+        width: 128, 
+        height: 128, 
+        borderRadius: 4, 
+        borderWidth: 1,
+        borderColor: 'gray',
+        marginTop: 20,
+        marginBottom: 20,
+        marginHorizontal: 8
+    },
 
     icon_home:{
         marginHorizontal: 8,     
@@ -51,14 +61,16 @@ export default styles = StyleSheet.create({
     page_container: {
         alignContent:'space-between',
         flexDirection:'row',
-        marginHorizontal:8,
-        marginVertical:8
+        marginHorizontal:12,
+        marginTop:24,
+        marginBottom:12
     },
     page_content: {
         alignContent:'space-between',
         alignItems:'center',
         flexDirection:'row',
-        marginVertical:8
+        marginVertical:8,
+        marginHorizontal:4
     },
 
     avatar:{
@@ -73,7 +85,7 @@ export default styles = StyleSheet.create({
         borderRadius: 2,
         padding: 10,
         marginBottom: 8,
-        marginHorizontal: 6,
-        elevation:1
+        marginHorizontal: 12,
+        elevation:4
     }
 })
