@@ -9,8 +9,21 @@ export default styles = StyleSheet.create({
         width: 128,
         justifyContent:'center',
         alignItems: 'center',
-        marginHorizontal: 30,
         textDecorationColor:'black'
+    },
+
+    login_input:{
+        borderColor: 'gray',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 2,
+        width: 300,
+        marginBottom: 20
+    },
+
+    login_label:{
+        fontSize: 16,
+        fontWeight:'bold'
     },
 
     input:{
@@ -19,6 +32,17 @@ export default styles = StyleSheet.create({
         borderWidth: 1,
         padding: 2,
         width: 300,
+        marginBottom: 20,
+        flex:1
+    },
+
+    input_chit:{
+        borderColor: 'gray',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 2,
+        width: 350,
+        height: 80,
         marginBottom: 20
     },
     
@@ -46,10 +70,16 @@ export default styles = StyleSheet.create({
         marginHorizontal: 8,     
     },
 
-    //Login page and names in Home + Search
+    //names in Home + Search
     label: {
         fontSize: 16,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        flex:1
+    },
+
+    user_details:{
+        fontSize: 16,
+        fontWeight:'bold', 
     },
     
     page_title:{
@@ -66,15 +96,17 @@ export default styles = StyleSheet.create({
         marginBottom:12
     },
     page_content: {
-        alignContent:'space-between',
+        alignContent:'space-around',
         alignItems:'center',
         flexDirection:'row',
         marginVertical:8,
-        marginHorizontal:4
+        marginHorizontal:18
     },
 
-    avatar:{
-        marginRight: 8
+    new_chit_page:{
+        alignContent:'center',
+        flexDirection:'column',
+        marginHorizontal:12
     },
 
     chit_layout:{

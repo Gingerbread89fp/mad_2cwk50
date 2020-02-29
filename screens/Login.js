@@ -9,7 +9,7 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      id: ''
+      user_id: ''
     }
   }
 
@@ -29,7 +29,7 @@ class Login extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
         this.setState({
-            id: responseJson.id,
+            user_id: responseJson.id,
             token: responseJson.token
         });
         AsyncStorage.setItem('token', JSON.stringify(responseJson.token));
@@ -44,11 +44,10 @@ class Login extends Component {
   }
 
   getUserDetails(){
-    return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.id)
+    return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.user_id)
     .then((response) => response.json())
         .then((responseJson) => {
             this.setState({
-                id: id,
                 given_name: responseJson.given_name,
                 family_name: responseJson.family_name,
                 email: responseJson.email
@@ -66,15 +65,15 @@ class Login extends Component {
 
         <Image style={styles.image}></Image>
 
-        <Text style={styles.label}>Email:</Text>
+        <Text style={styles.login_label}>Email:</Text>
         <TextInput
-          style={styles.input}
+          style={styles.login_input}
           value={this.state.email}
           onChangeText={(email) => this.setState({ email })} />
 
-        <Text style={styles.label}>Password:</Text>
+        <Text style={styles.login_label}>Password:</Text>
         <TextInput
-          style={styles.input}
+          style={styles.login_input}
           value={this.state.password}
           onChangeText={(password) => this.setState({ password })}
           secureTextEntry={true} />

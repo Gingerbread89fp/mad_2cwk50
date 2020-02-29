@@ -20,8 +20,6 @@ class Profile extends Component {
       })
   }
 
-
-
   render() {
     return (
       <View>
@@ -29,7 +27,7 @@ class Profile extends Component {
           <Text style={styles.page_title}>Profile</Text>
 
           <CustomIcon
-            name={'md-log-out'}
+            name={'logout'}
             size={40}
             color={'green'}
             onPress={() => this.logout()}
@@ -39,9 +37,10 @@ class Profile extends Component {
         <View style={styles.page_content}>
           <Image style={styles.image_profile} ></Image>
           <View>
-            <Text style={styles.label}>First Name:</Text>
-            <Text style={styles.label}>Last Name:</Text>
-            <Text style={styles.label}>Email:</Text>
+            <Text style={styles.user_details}>First Name:</Text>
+            <Text style={styles.user_details}>Last Name:</Text>
+            <Text style={styles.user_details}>Email:</Text>
+            
           </View>
         </View>
 
