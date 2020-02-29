@@ -15,7 +15,9 @@ class NewChits extends Component {
     }
 
     static navigationOptions= {
-        title: 'New Chit'
+        title: 'New Chit',
+        headerTitleStyle: styles.page_title,
+        headerStyle: {height: 64, marginBottom: 12}
       }
 
     postChits(){
@@ -39,13 +41,15 @@ class NewChits extends Component {
 
     render() {
         return (
-        
-            <View>
+            <View style={styles.new_chit_page}>
                 <TextInput 
-                    style={styles.input}
+                    style={styles.input_chit}
                     value={this.state.chit_content}
+                    multiline={true}
+                    maxLength={141} //prevent users to write more than 141 chars
                     onChangeText={(chit_content) => this.setState({ chit_content })}/>
-
+                    
+                <Text>{this.state.chit_content.length}/141</Text> 
                 
                 <TouchableOpacity
                     style={styles.button_style}
