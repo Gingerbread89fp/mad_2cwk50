@@ -19,12 +19,20 @@ class Home extends Component {
         headerTitleStyle: styles.page_title,
         headerStyle: {height: 64, marginBottom: 12},
         headerRight:() =>(
-            <CustomIcon
-                name={'message-text-outline'}
-                size={40}
-                color={'green'}
-                onPress={() => navigation.navigate('NewChits')}
-            />
+            <View style={styles.icon_home}>
+                <CustomIcon
+                    name={'message-text-outline'}
+                    size={40}
+                    color={'green'}
+                    onPress={() => navigation.navigate('NewChits')}
+                />
+                <CustomIcon
+                    name={'login'}
+                    size={40}
+                    color={'green'}
+                    onPress={() => navigation.navigate('Login')}
+                />
+            </View>
         )
     });
 
@@ -43,7 +51,7 @@ class Home extends Component {
 
     displayData(item) {
         return (
-            <View style={styles.chit_layout}>
+            <View style={styles.chit_layout} key={item.chit_id}>
                 <Text style={styles.label}>{item.user.given_name}</Text>
                 <Text>{item.chit_content}</Text>
             </View>
@@ -60,7 +68,7 @@ class Home extends Component {
                 <FlatList
                     data={this.state.chitsList}
                     renderItem={({ item, index }) => this.displayData(item, index)}
-                    keyExtractor={({ id }, index) => id}
+                    keyExtractor={( {item}, index) => 'chit-list-'+index}
                 />
             </View>
         )

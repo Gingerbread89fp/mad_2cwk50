@@ -68,7 +68,9 @@ export default styles = StyleSheet.create({
 
     //HOME PAGE
     icon_home:{
-        marginHorizontal: 8,     
+        marginHorizontal: 8, 
+        flexDirection: "row", 
+        justifyContent: "space-evenly"    
     },
 
     //names in Home + Search
