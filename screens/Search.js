@@ -55,7 +55,13 @@ class Search extends Component{
                             this.setState({ token: result });
                             this.followUser(item.user_id)
                         }
-                        else{Alert.alert("Please login to follow other chitters")}
+                        else{
+                            Alert.alert(
+                                'Login error',
+                                'Please login to follow other chitters',
+                                //[{text: 'Ok', onPress: () => navigation.navigate('Login')}]
+                            )
+                        }
                     })}/>
             </View>
         )
