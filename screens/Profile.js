@@ -18,6 +18,20 @@ class Profile extends Component {
     }
   }
 
+  static navigationOptions = () => ({
+    title: 'Profile',
+    headerTitleStyle: styles.page_title,
+    headerStyle: {height: 64, marginBottom: 12},
+    headerRight:() =>(
+        <CustomIcon
+            name={'logout'}
+            size={40}
+            color={'green'}
+            onPress={() => this.logout()}
+        />
+    )
+  });
+
   logout() {
     return fetch('http://10.0.2.2:3333/api/v0.0.5/logout')
       .then((response) => {
@@ -39,11 +53,17 @@ class Profile extends Component {
           this.setState({ user_details: JSON.parse(result_details) })
         })
       }
-      else { Alert.alert("Please login to view your profile") }
+      else { 
+        const { navigation } = this.props;
+        Alert.alert(
+          'Login error',
+          'Please login to view your profile',
+          //[{text: 'Ok', onPress: () => navigation.navigate('Login')}]
+        )
+      }
     })
     .then(() => this.getFollowers())
     .then(() => this.getFollowing())
-
   }
 
   getFollowers() {
@@ -99,7 +119,7 @@ class Profile extends Component {
       .then((response) => {
           Alert.alert("user unfollowed successfully ")  
       })
-      .then((response) => this.props.navigation.navigate('Profile'))
+      .then(() => this.props.navigation.navigate('Profile'))
       .catch((error)=>{
       console.log(error)
       })
@@ -146,7 +166,7 @@ class Profile extends Component {
             <FlatList
               data={this.state.followings}
               renderItem={({ item, index }) => this.displayData(item, index)}
-              keyExtractor={({ id }, index) => id}
+              keyExtractor={({ item}, index) => 'following-list'+index}
             />
           </View>
         </View>
