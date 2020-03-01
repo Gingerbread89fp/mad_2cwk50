@@ -83,11 +83,27 @@ class Profile extends Component {
               color={'green'} 
               onPress={() => AsyncStorage.getItem('token', (err, result) =>{
                   this.setState({ token: result });
-                  this.followUser(item.user_id)
+                  this.unFollowUser(item.user_id)
               })}/>
         </View>
     )
-}
+  }
+
+  unFollowUser(user_id){
+    return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+user_id+'/follow', {
+        method: 'DELETE',
+        headers: { 
+            "Content-Type": "application/json", 
+            "X-Authorization": JSON.parse(this.state.token)
+        }})
+      .then((response) => {
+          Alert.alert("user unfollowed successfully ")  
+      })
+      .then((response) => this.props.navigation.navigate('Profile'))
+      .catch((error)=>{
+      console.log(error)
+      })
+  }
 
   componentDidMount() {
     this.getUserDetails();
