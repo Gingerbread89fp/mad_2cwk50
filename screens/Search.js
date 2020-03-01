@@ -11,7 +11,7 @@ class Search extends Component{
         super(props);
         this.state = {
             input_text: '',
-            toke:'',
+            token:'',
             userList: []
         }
     }
