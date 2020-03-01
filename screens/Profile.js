@@ -58,7 +58,7 @@ class Profile extends Component {
         Alert.alert(
           'Login error',
           'Please login to view your profile',
-          //[{text: 'Ok', onPress: () => navigation.navigate('Login')}]
+          [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
         )
       }
     })

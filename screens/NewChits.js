@@ -59,7 +59,14 @@ class NewChits extends Component {
                             this.postChits();
                             console.log('DEBUG TOKEN: ', result)
                         }
-                        else{Alert.alert("Please login to post chits")}
+                        else{
+                            const { navigation } = this.props;
+                            Alert.alert(
+                                'Login error',
+                                'Please login to post chits',
+                                [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
+                            )
+                        }
                     })}>
                     <Text>POST CHITS</Text>
                 </TouchableOpacity>

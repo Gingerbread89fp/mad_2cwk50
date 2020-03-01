@@ -56,10 +56,11 @@ class Search extends Component{
                             this.followUser(item.user_id)
                         }
                         else{
+                            const { navigation } = this.props;
                             Alert.alert(
                                 'Login error',
                                 'Please login to follow other chitters',
-                                //[{text: 'Ok', onPress: () => navigation.navigate('Login')}]
+                                [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
                             )
                         }
                     })}/>
