@@ -1,4 +1,3 @@
-import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -11,15 +10,15 @@ import Profile from './screens/Profile';
 import NewChits from './screens/NewChits';
 
 const AppNavigator = createStackNavigator({
-  /*Login,
-  Register,*/
   Home: {
     screen: createBottomTabNavigator({
       Search,
       Home: {
         screen: createStackNavigator({
           Home,
-          NewChits
+          NewChits,
+          Login,
+          Register
         })
       },
       Profile
