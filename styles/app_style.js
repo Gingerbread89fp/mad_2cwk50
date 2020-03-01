@@ -11,7 +11,27 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         textDecorationColor:'black'
     },
+    page_title:{
+        fontSize: 32,
+        fontWeight:'bold',
+        flex:1
+    },
+    page_container: {
+        alignContent:'space-between',
+        flexDirection:'row',
+        marginHorizontal:12,
+        marginTop:24,
+        marginBottom:12
+    },
+    page_content: {
+        alignContent:'space-around',
+        alignItems:'center',
+        flexDirection:'row',
+        marginVertical:8,
+        marginHorizontal:18
+    },
 
+    //LOGIN PAGE STYLE
     login_input:{
         borderColor: 'gray',
         borderStyle: 'solid',
@@ -36,16 +56,6 @@ export default styles = StyleSheet.create({
         flex:1
     },
 
-    input_chit:{
-        borderColor: 'gray',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        padding: 2,
-        width: 350,
-        height: 80,
-        marginBottom: 20
-    },
-    
     image:{
         width: 180, 
         height: 180, 
@@ -55,17 +65,8 @@ export default styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20
     },
-    image_profile:{
-        width: 128, 
-        height: 128, 
-        borderRadius: 4, 
-        borderWidth: 1,
-        borderColor: 'gray',
-        marginTop: 20,
-        marginBottom: 20,
-        marginHorizontal: 8
-    },
 
+    //HOME PAGE
     icon_home:{
         marginHorizontal: 8,     
     },
@@ -81,33 +82,6 @@ export default styles = StyleSheet.create({
         fontSize: 16,
         fontWeight:'bold', 
     },
-    
-    page_title:{
-        fontSize: 32,
-        fontWeight:'bold',
-        flex:1
-    },
-
-    page_container: {
-        alignContent:'space-between',
-        flexDirection:'row',
-        marginHorizontal:12,
-        marginTop:24,
-        marginBottom:12
-    },
-    page_content: {
-        alignContent:'space-around',
-        alignItems:'center',
-        flexDirection:'row',
-        marginVertical:8,
-        marginHorizontal:18
-    },
-
-    new_chit_page:{
-        alignContent:'center',
-        flexDirection:'column',
-        marginHorizontal:12
-    },
 
     chit_layout:{
         backgroundColor:'white',
@@ -119,5 +93,54 @@ export default styles = StyleSheet.create({
         marginBottom: 8,
         marginHorizontal: 12,
         elevation:4
+    },
+    
+    
+    //NEW CHIT PAGE
+    input_chit:{
+        borderColor: 'gray',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 2,
+        width: 350,
+        height: 80,
+        marginBottom: 20
+    },
+
+    new_chit_page:{
+        alignContent:'center',
+        flexDirection:'column',
+        marginHorizontal:12
+    },
+
+
+    //PROFILE PAGE
+    image_profile:{
+        width: 128, 
+        height: 128, 
+        borderRadius: 4, 
+        borderWidth: 1,
+        borderColor: 'gray',
+        marginTop: 20,
+        marginBottom: 20,
+        marginHorizontal: 8
+    },
+
+    profile_follow:{
+        flexDirection:'column',
+        justifyContent: 'space-around',
+        marginHorizontal:20,
+        padding:8,
+        width: '50%'
+    },
+    follow_title:{
+        fontSize: 32,
+        fontWeight:'bold',
+        marginBottom:6
+    },
+    name_follow: {
+        fontSize: 18,
+        fontWeight:'bold',
+        flex:1
     }
 })
