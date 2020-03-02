@@ -8,6 +8,7 @@ import Home from './screens/Home';
 import Search from './screens/Search';
 import Profile from './screens/Profile';
 import NewChits from './screens/NewChits';
+import UpdateProfile from './screens/UpdateProfile';
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -21,7 +22,12 @@ const AppNavigator = createStackNavigator({
           Register
         })
       },
-      Profile
+      Profile:{
+        screen: createStackNavigator({
+          Profile,
+          UpdateProfile
+        })
+      }
     }, 
     {
       initialRouteName: 'Home'
