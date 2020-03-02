@@ -44,7 +44,7 @@ class Search extends Component{
         return(
             <View style={styles.page_content}>
                 
-                <Text style={styles.label}>{item.given_name} {item.family_name}</Text>
+                <Text style={styles.name_label}>{item.given_name} {item.family_name}</Text>
 
                 <CustomIcon 
                     name={'account-plus'} 
@@ -102,7 +102,8 @@ class Search extends Component{
 
                     <CustomIcon 
                         name={'magnify'} 
-                        size={36} color={'green'} 
+                        size={36} 
+                        color={'green'} 
                         onPress={() => this.searchUsers()}/>
                 </View>
                 

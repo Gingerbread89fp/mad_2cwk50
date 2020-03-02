@@ -65,13 +65,13 @@ class Login extends Component {
 
         <Image style={styles.image}></Image>
 
-        <Text style={styles.login_label}>Email:</Text>
+        <Text style={styles.label}>Email:</Text>
         <TextInput
           style={styles.login_input}
           value={this.state.email}
           onChangeText={(email) => this.setState({ email })} />
 
-        <Text style={styles.login_label}>Password:</Text>
+        <Text style={styles.label}>Password:</Text>
         <TextInput
           style={styles.login_input}
           value={this.state.password}

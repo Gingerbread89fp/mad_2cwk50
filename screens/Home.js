@@ -52,7 +52,7 @@ class Home extends Component {
     displayData(item) {
         return (
             <View style={styles.chit_layout} key={item.chit_id}>
-                <Text style={styles.label}>{item.user.given_name}</Text>
+                <Text style={styles.name_label}>{item.user.given_name}</Text>
                 <Text>{item.chit_content}</Text>
             </View>
         )

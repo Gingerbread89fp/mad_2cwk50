@@ -16,6 +16,8 @@ class Register extends Component{
 
   static navigationOptions={
     title: 'Registration page',
+    headerTitleStyle: styles.page_title,
+    headerStyle: {height: 64, marginBottom: 12},
   }
 
   register(){
@@ -40,38 +42,38 @@ class Register extends Component{
 
   render(){
     return(
-      <View style={{flex:1, flexDirection:'column', alignItems:'flex-start'}}>
+      <View style={styles.details_form}>
 
         <Text style={styles.label}>Name:</Text>
         <TextInput 
-          style={styles.input} 
+          style={styles.form_input} 
           value={this.state.given_name} 
           onChangeText={(given_name)=>this.setState({given_name})}/>
 
 
         <Text style={styles.label}>Last Name:</Text>
         <TextInput 
-          style={styles.input} 
+          style={styles.form_input} 
           value={this.state.family_name} 
           onChangeText={(family_name)=>this.setState({family_name})}/>
 
         <Text style={styles.label}>Email:</Text>
         <TextInput 
-          style={styles.input} 
+          style={styles.form_input} 
           value={this.state.email} 
           onChangeText={(email)=>this.setState({email})}/>
 
         <Text style={styles.label}>Password:</Text>
         <TextInput 
-          style={styles.input} 
+          style={styles.form_input} 
           value={this.state.password}
           onChangeText={(password) => this.setState({password})}
           secureTextEntry={true}/>
         
         <TouchableOpacity
           style={styles.button_style} 
-          onPress={()=> this.register()}>
-              <Text>Signup</Text>
+          onPress={()=> this.updateProfile()}>
+              <Text>SIGNUP</Text>
         </TouchableOpacity>
 
       </View>

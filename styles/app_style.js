@@ -31,6 +31,22 @@ export default styles = StyleSheet.create({
         marginHorizontal:18
     },
 
+    details_form:{
+        flexDirection:'column',
+        marginHorizontal:12,
+        flex:1
+    },
+
+    form_input:{
+        alignItems:'stretch',
+        borderColor: 'gray',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 2,
+        width: 300,
+        marginBottom: 20,
+    },
+
     //LOGIN PAGE STYLE
     login_input:{
         borderColor: 'gray',
@@ -41,7 +57,7 @@ export default styles = StyleSheet.create({
         marginBottom: 20
     },
 
-    login_label:{
+    label:{
         fontSize: 16,
         fontWeight:'bold'
     },
@@ -74,7 +90,7 @@ export default styles = StyleSheet.create({
     },
 
     //names in Home + Search
-    label: {
+    name_label: {
         fontSize: 16,
         fontWeight:'bold',
         flex:1
@@ -104,9 +120,8 @@ export default styles = StyleSheet.create({
         borderStyle: 'solid',
         borderWidth: 1,
         padding: 2,
-        width: 350,
-        height: 80,
-        marginBottom: 20
+        width: 380,
+        height: 80
     },
 
     new_chit_page:{
@@ -115,12 +130,27 @@ export default styles = StyleSheet.create({
         marginHorizontal:12
     },
 
+    new_chits_buttons_layout:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginVertical:12,
+    },
+    new_chits_buttons:{
+        marginRight:8,
+        borderWidth:2,
+        borderColor: 'green',
+        height: 32,
+        width: 112,
+        justifyContent:'center',
+        alignItems:'center',
+        textDecorationColor:'black'
+    },
 
     //PROFILE PAGE
     image_profile:{
-        width: 128, 
+        width: 128,
         height: 128, 
-        borderRadius: 4, 
+        borderRadius: 64, 
         borderWidth: 1,
         borderColor: 'gray',
         marginTop: 20,
