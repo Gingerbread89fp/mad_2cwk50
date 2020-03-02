@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Image, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import PhotoUpload from 'react-native-photo-upload';
 
 import CustomIcon from '../app_components/customizedComponents';
 
@@ -18,19 +19,9 @@ class Profile extends Component {
     }
   }
 
-  static navigationOptions = () => ({
-    title: 'Profile',
-    headerTitleStyle: styles.page_title,
-    headerStyle: {height: 64, marginBottom: 12},
-    headerRight:() =>(
-        <CustomIcon
-            name={'logout'}
-            size={40}
-            color={'green'}
-            onPress={() => this.logout()}
-        />
-    )
-  });
+  static navigationOptions={
+    header: null
+  }
 
   logout() {
     return fetch('http://10.0.2.2:3333/api/v0.0.5/logout')
@@ -44,11 +35,10 @@ class Profile extends Component {
       })
   }
 
-  getUserDetails() {
-    AsyncStorage.getItem('userId', (err, result) => {
+  async getUserDetails() {
+    await AsyncStorage.getItem('userId', (err, result) => {
       if (result != null) {
         this.setState({ user_id: result });
-        console.log('***** DEBUG profile user ID ', this.state.user_id)
         AsyncStorage.getItem('user', (err, result_details) => {
           this.setState({ user_details: JSON.parse(result_details) })
         })
@@ -86,7 +76,6 @@ class Profile extends Component {
         this.setState({
           followings: responseJson,
         });
-        console.log('**** DEBUG followings ', responseJson)
       })
       .catch((error) => {
         console.log(error)
@@ -119,7 +108,6 @@ class Profile extends Component {
       .then((response) => {
           Alert.alert("user unfollowed successfully ")  
       })
-      .then(() => this.props.navigation.navigate('Profile'))
       .catch((error)=>{
       console.log(error)
       })
@@ -143,12 +131,23 @@ class Profile extends Component {
           />
         </View>
 
+        <View style={styles.page_container}>
+          <CustomIcon
+              name={'account-edit'}
+              size={40}
+              color={'green'}
+              onPress={() => this.props.navigation.navigate('UpdateProfile')}
+              label='edit profile'
+          />
+        </View>
+
         <View style={styles.page_content}>
-          <Image style={styles.image_profile} ></Image>
+            
+          
           <View>
             <Text style={styles.user_details}>First Name: {this.state.user_details.given_name}</Text>
             <Text style={styles.user_details}>Last Name: {this.state.user_details.family_name}</Text>
-            <Text style={styles.user_details}>Email: {this.state.user_details.email}</Text>
+            <Text style={styles.user_details}>Email: {this.state.user_details.email}</Text>        
           </View>
         </View>
 
@@ -156,8 +155,8 @@ class Profile extends Component {
             <Text style={styles.follow_title}>Followers ({this.state.followers.length})</Text>
             <FlatList
             data={this.state.followers}
-            renderItem={({ item, index }) => this.displayData(item, index)}
-            keyExtractor={({ id }, index) => id}
+            renderItem={({ item, index }) => this.displayData(item)}
+            keyExtractor={({ item}, index) => 'followers-list'+index}
             />
           </View>
           
@@ -165,7 +164,7 @@ class Profile extends Component {
             <Text style={styles.follow_title}>Following ({this.state.followings.length})</Text>
             <FlatList
               data={this.state.followings}
-              renderItem={({ item, index }) => this.displayData(item, index)}
+              renderItem={({ item, index }) => this.displayData(item)}
               keyExtractor={({ item}, index) => 'following-list'+index}
             />
           </View>
