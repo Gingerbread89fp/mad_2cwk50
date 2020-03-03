@@ -16,8 +16,10 @@ export default class CustomFormInput extends Component {
                 <Text style={styles.label}> {this.props.labelTitle}</Text>
                 <TextInput
                     style={styles.form_input}
+                    placeholder={this.props.placeholder}
                     value={this.props.value}
-                    onChangeText={this.props.onChangeText} />
+                    onChangeText={this.props.onChangeText} 
+                    secureTextEntry={this.props.secureTextEntry}/>
             </View>
         )
     }
@@ -25,6 +27,8 @@ export default class CustomFormInput extends Component {
 
 CustomFormInput.propTypes = {
     labelTitle: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
     value: PropTypes.string,
-    onChangeText: PropTypes.func.isRequired
+    onChangeText: PropTypes.func.isRequired,
+    secureTextEntry: PropTypes.bool
 }

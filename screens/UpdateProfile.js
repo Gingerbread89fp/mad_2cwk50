@@ -9,12 +9,12 @@ class UpdateProfile extends Component{
   constructor(props){
     super(props);
     this.state = {
-        //given_name: '',
+        token:'',
+        given_name: '',
         family_name: '',
-        //email: '',
-        //password: '',
-        user_id: '',
-        user_details: []
+        email: '',
+        password: '',
+        user_id: ''
     }
   }
 
@@ -24,49 +24,51 @@ class UpdateProfile extends Component{
     headerStyle: {height: 64, marginBottom: 12},
   }
 
-  async getUserDetails() {
-    await AsyncStorage.getItem('userId', (err, result) => {
-      if (result != null) {
-        this.setState({ user_id: result });
-        console.log('**** user_id', this.state.user_id)
+  getUserDetails() {
+    AsyncStorage.getItem('token', (err, result) => {
+     this.setState({ token: result });
         AsyncStorage.getItem('user', (err, result_details) => {
-          this.setState({ 
-              user_details: JSON.parse(result_details),
-              family_name: this.state.user_details.family_name
+            this.setState({ 
+                user_id: JSON.parse(result_details).user_id,
+                given_name: JSON.parse(result_details).given_name,
+                family_name: JSON.parse(result_details).family_name,
+                email: JSON.parse(result_details).email
             })
-            console.log("**** family name ", this.state.family_name)
         })
-      }
-      else { 
-        const { navigation } = this.props;
-        Alert.alert(
-          'Login error',
-          'Please login to view your profile',
-          [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
-        )
-      }
     })
-    //.then(() => this.updateProfile())
   }
 
   updateProfile(){
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.user_id, {
       method: 'PATCH',
-      headers: { "Content-Type": "application/json", 'Accept': 'application/json', },
+      headers: { 
+          "Content-Type": "application/json", 
+          "X-Authorization": JSON.parse(this.state.token) 
+        },
       body: JSON.stringify({
-        //given_name: this.state.given_name,
+        given_name: this.state.given_name,
         family_name: this.state.family_name,
-        //email: this.state.email,
-        //password: this.state.password
+        email: this.state.email,
+        password: this.state.password
       })
     })
     .then((response) => {
       Alert.alert("Details updated successfully")
     })
-    .then((response) => { this.props.navigation.navigate('Profile')})
+    //re fetch the new user details so to be able to update the storage details
+    .then(() => {return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.user_id)})
+    .then((response) => response.json())
+    .then((responseJson)=>{
+        AsyncStorage.setItem('user', JSON.stringify(responseJson))
+    })
+    .then((response) => {this.props.navigation.navigate('Profile')})
     .catch((error)=>{
       console.log(error)
     })
+  }
+
+  componentDidMount() {
+    this.getUserDetails();
   }
 
   render(){
@@ -82,6 +84,7 @@ class UpdateProfile extends Component{
         <CustomFormInput 
             labelTitle={'Last Name:'}
             value={this.state.family_name}
+            placeholder={this.state.family_name}
             onChangeText={(family_name)=>this.setState({family_name})}
         />
 
@@ -95,11 +98,12 @@ class UpdateProfile extends Component{
             labelTitle={'Password:'}
             value={this.state.password}
             onChangeText={(password)=>this.setState({password})}
+            secureTextEntry={true}
         />
         
         <TouchableOpacity
           style={styles.button_style} 
-          onPress={()=> this.getUserDetails()}>
+          onPress={()=> this.updateProfile()}>
               <Text>UPDATE DETAILS</Text>
         </TouchableOpacity>
 
