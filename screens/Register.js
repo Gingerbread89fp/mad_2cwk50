@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, Alert, TouchableOpacity } from 'react-native';
+import CustomFormInput from '../app_components/form'
 
 import styles from '../styles/app_style'
 
@@ -44,31 +45,29 @@ class Register extends Component{
     return(
       <View style={styles.details_form}>
 
-        <Text style={styles.label}>Name:</Text>
-        <TextInput 
-          style={styles.form_input} 
-          value={this.state.given_name} 
-          onChangeText={(given_name)=>this.setState({given_name})}/>
+        <CustomFormInput 
+            labelTitle={'First Name:'}
+            value={this.state.given_name}
+            onChangeText={(given_name) => this.setState({given_name})}
+        />
 
+        <CustomFormInput 
+            labelTitle={'Last Name:'}
+            value={this.state.family_name}
+            onChangeText={(family_name)=>this.setState({family_name})}
+        />
 
-        <Text style={styles.label}>Last Name:</Text>
-        <TextInput 
-          style={styles.form_input} 
-          value={this.state.family_name} 
-          onChangeText={(family_name)=>this.setState({family_name})}/>
+        <CustomFormInput 
+            labelTitle={'Email:'}
+            value={this.state.email}
+            onChangeText={(email)=>this.setState({email})}
+        />
 
-        <Text style={styles.label}>Email:</Text>
-        <TextInput 
-          style={styles.form_input} 
-          value={this.state.email} 
-          onChangeText={(email)=>this.setState({email})}/>
-
-        <Text style={styles.label}>Password:</Text>
-        <TextInput 
-          style={styles.form_input} 
-          value={this.state.password}
-          onChangeText={(password) => this.setState({password})}
-          secureTextEntry={true}/>
+        <CustomFormInput 
+            labelTitle={'Password:'}
+            value={this.state.password}
+            onChangeText={(password)=>this.setState({password})}
+        />
         
         <TouchableOpacity
           style={styles.button_style} 
