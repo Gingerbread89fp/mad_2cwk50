@@ -40,6 +40,8 @@ target 'mad_2cwk50_piana' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   target 'mad_2cwk50_pianaTests' do
     inherit! :search_paths
     # Pods for testing
