@@ -137,12 +137,14 @@ class Profile extends Component {
               size={40}
               color={'green'}
               onPress={() => this.props.navigation.navigate('UpdateProfile')}
-              label='edit profile'
           />
         </View>
 
         <View style={styles.page_content}>
-            
+            <Image 
+              style={styles.image_profile} 
+              source={require('../assets/images/default_user.png')}
+            />
           
           <View>
             <Text style={styles.user_details}>First Name: {this.state.user_details.given_name}</Text>
