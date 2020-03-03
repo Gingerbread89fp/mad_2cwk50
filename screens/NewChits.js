@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, View, TextInput, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import CustomIcon from '../app_components/customizedComponents';
+import CustomIcon from '../app_components/customizedIconButton';
 
 import styles from '../styles/app_style'
 

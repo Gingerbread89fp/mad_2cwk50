@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
-import CustomIcon from '../app_components/customizedComponents';
+import CustomIcon from '../app_components/customizedIconButton';
 
 class Camera extends Component {
 

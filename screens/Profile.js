@@ -3,7 +3,7 @@ import { Text, View, Image, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import PhotoUpload from 'react-native-photo-upload';
 
-import CustomIcon from '../app_components/customizedComponents';
+import CustomIcon from '../app_components/customizedIconButton';
 
 import styles from '../styles/app_style'
 

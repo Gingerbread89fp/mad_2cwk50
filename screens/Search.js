@@ -3,7 +3,7 @@ import { Text, View, TextInput, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 
 import styles from '../styles/app_style';
-import CustomIcon from '../app_components/customizedComponents';
+import CustomIcon from '../app_components/customizedIconButton';
 
 class Search extends Component{
 

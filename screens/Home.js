@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, Text, View } from 'react-native'; 
 
-import CustomIcon from '../app_components/customizedComponents';
+import CustomIcon from '../app_components/customizedIconButton';
 
 import styles from '../styles/app_style'
 
