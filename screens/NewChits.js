@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, View, TextInput, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { RNCamera } from 'react-native-camera';
 import CustomIcon from '../app_components/customizedComponents';
 
 import styles from '../styles/app_style'
@@ -21,7 +20,7 @@ class NewChits extends Component {
         title: 'New Chit',
         headerTitleStyle: styles.page_title,
         headerStyle: {height: 64, marginBottom: 12}
-      }
+    }
 
     postChits(){
         return fetch('http://10.0.2.2:3333/api/v0.0.5/chits', {
@@ -91,7 +90,6 @@ class NewChits extends Component {
                             if(result !=null){
                                 this.setState({token: result});
                                 AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
-                                this.chit_content.setNativeProps({chit_content:''})
                             }
                             else{this.displayAlertMessage()}
                         })}>
@@ -113,18 +111,19 @@ class NewChits extends Component {
                         <Text>VIEW DRAFT</Text>
                     </TouchableOpacity>
                 </View>
-
-                <RNCamera 
-                    ref={ref => {this.camera = ref}}
-                    style={styles.camera}
-                />
-                <CustomIcon
-                    name={'camera'}
-                    size={40}
-                    color={'green'}
-                    onPress={() => this.takePicture()}
-                />
                 
+                <TouchableOpacity
+                    style={styles.new_chits_buttons}
+                    onPress={() => AsyncStorage.getItem('token', (err, result) =>{
+                        if(result !=null){
+                            this.props.navigation.navigate('Camera')
+                        }
+                        else{this.displayAlertMessage()}
+                    })}>
+                    <Text>POST PICTURE</Text>
+                </TouchableOpacity>
+
+
                 <Text>DRAFTS</Text>
 
                 
