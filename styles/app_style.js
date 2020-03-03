@@ -146,11 +146,19 @@ export default styles = StyleSheet.create({
         textDecorationColor:'black'
     },
 
-    camera:{
-        flex:1,
-        alignItems:'center',
-        width:'100%'
+    //CAMERA PAGE
+    camera_container:{ 
+        flex: 1, 
+        flexDirection: 'column' 
     },
+
+    camera_button_container: { 
+        flex: 0, 
+        flexDirection: 'row', 
+        justifyContent: 'center',
+        backgroundColor: 'black' 
+    },
+
 
     //PROFILE PAGE
     image_profile:{
