@@ -72,7 +72,7 @@ class Register extends Component{
         
         <TouchableOpacity
           style={styles.button_style} 
-          onPress={()=> this.updateProfile()}>
+          onPress={()=> this.register()}>
               <Text>SIGNUP</Text>
         </TouchableOpacity>
 
