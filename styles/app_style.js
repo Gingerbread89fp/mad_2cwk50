@@ -146,6 +146,12 @@ export default styles = StyleSheet.create({
         textDecorationColor:'black'
     },
 
+    camera:{
+        flex:1,
+        alignItems:'center',
+        width:'100%'
+    },
+
     //PROFILE PAGE
     image_profile:{
         width: 128,
