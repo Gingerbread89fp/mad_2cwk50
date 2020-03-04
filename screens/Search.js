@@ -12,7 +12,8 @@ class Search extends Component{
         this.state = {
             input_text: '',
             token:'',
-            userList: []
+            userList: [],
+            isFollowed: false
         }
     }
 
@@ -38,32 +39,42 @@ class Search extends Component{
 
     componentDidMount() {
         this.searchUsers();
+        AsyncStorage.getItem('token', (err, result) =>{
+            this.setState({ token: result });
+        })
     }
 
     displayData(item){
+        const isFollowed = this.state.isFollowed
         return(
             <View style={styles.page_content}>
                 
                 <Text style={styles.name_label}>{item.given_name} {item.family_name}</Text>
-
-                <CustomIcon 
+                {isFollowed ? (
+                    <CustomIcon 
+                        name={'account-minus'} 
+                        size={36} 
+                        color={'green'} 
+                        onPress={() => {
+                            if(this.state.token !=null){
+                                this.unFollowUser(item.user_id)
+                            }
+                            else{
+                                const { navigation } = this.props;
+                                Alert.alert(
+                                    'Login error',
+                                    'Please login to follow other chitters',
+                                    [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
+                                )
+                            }
+                        }}
+                    />) : (
+                    <CustomIcon 
                     name={'account-plus'} 
                     size={36} 
                     color={'green'} 
-                    onPress={() => AsyncStorage.getItem('token', (err, result) =>{
-                        if(result !=null){
-                            this.setState({ token: result });
-                            this.followUser(item.user_id)
-                        }
-                        else{
-                            const { navigation } = this.props;
-                            Alert.alert(
-                                'Login error',
-                                'Please login to follow other chitters',
-                                [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
-                            )
-                        }
-                    })}/>
+                    onPress={() => this.followUser(item.user_id)} />
+                )}
             </View>
         )
     }
@@ -78,12 +89,29 @@ class Search extends Component{
             }})
         .then((response) => {
             Alert.alert("user followed successfully ");
+            this.setState({isFollowed: true})
            
         })
         .catch((error)=>{
         console.log(error)
         })
     }
+
+    unFollowUser(user_id){
+        return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+user_id+'/follow', {
+            method: 'DELETE',
+            headers: { 
+                "Content-Type": "application/json", 
+                "X-Authorization": JSON.parse(this.state.token)
+            }})
+          .then((response) => {
+              Alert.alert("user unfollowed successfully ")
+              this.setState({isFollowed: false})  
+          })
+          .catch((error)=>{
+          console.log(error)
+          })
+      }
 
     render(){
         return(
