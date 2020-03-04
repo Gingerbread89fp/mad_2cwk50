@@ -35,7 +35,7 @@ class NewChits extends Component {
             })
             
         })
-        .then((response) => navigation.navigate('Home'))
+        .then((response) => this.props.navigation.navigate('Home'))
         .catch((error) => {
             console.log(error)
         })
@@ -45,17 +45,54 @@ class NewChits extends Component {
         const { navigation } = this.props;
         Alert.alert(
             'Login error',
-            'Please login to post chits',
+            'Please login to post/save/view chits',
             [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
         )
     }
 
     displayData(item) {
         return (
-            <View>
-                <Text>{item}</Text>
+            <View style={styles.chit_layout}>
+                <Text style={styles.chit_draft}>{item}</Text>
+                <View style={{flexDirection:'row', flex:1}}>
+                    <CustomIcon 
+                        name={'file-document-edit-outline'} 
+                        size={28} 
+                        color={'green'} 
+                        onPress={()=> this.editDraft}/>
+                    <CustomIcon 
+                        name={'delete-outline'} 
+                        size={28} 
+                        color={'green'} 
+                        onPress={()=> this.deleteDraft}/>
+                    <CustomIcon 
+                        name={'send'} 
+                        size={28} 
+                        color={'green'} 
+                        onPress={()=> {
+                            this.setState({chit_content: item})
+                        }}/>
+                    <CustomIcon 
+                        name={'timetable'} 
+                        size={28} 
+                        color={'green'} 
+                        onPress={()=> this.deleteDraft}/>
+                </View>
+                
             </View>
         )
+    }
+
+    componentDidMount(){
+        AsyncStorage.getItem('token', (err, result) =>{
+            this.setState({token: result})
+        })
+        AsyncStorage.getItem('chits', (err, chit_r)=>{
+            let chits = JSON.parse(chit_r)
+            this.setState({
+                chit_drafts: this.state.chit_drafts.concat(chits)
+            })
+        })
     }
 
     render() {
@@ -74,64 +111,55 @@ class NewChits extends Component {
                 <View style={styles.new_chits_buttons_layout}>
                     <TouchableOpacity
                         style={styles.new_chits_buttons}
-                        onPress={() => AsyncStorage.getItem('token', (err, result) =>{
-                            if(result !=null){
-                                this.setState({ token: result });
+                        onPress={() => {
+                            if(this.state.token !=null){
                                 this.postChits();
                             }
                             else{ this.displayAlertMessage() }
-                        })}>
+                        }}>
                         <Text>POST CHITS</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={styles.new_chits_buttons}
-                        onPress={() => AsyncStorage.getItem('token', (err, result) =>{
-                            if(result !=null){
-                                this.setState({token: result});
+                        onPress={() => {
+                            if(this.state.token !=null){
+                                this.setState({
+                                    chit_drafts: this.state.chit_drafts.concat(this.state.chit_content),
+                                    chit_content: ''
+                                })
+                                Alert.alert('Draft saved')
                                 AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
                             }
                             else{this.displayAlertMessage()}
-                        })}>
+                        }}>
                         <Text>SAVE DRAFT</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={styles.new_chits_buttons}
-                        onPress={() => AsyncStorage.getItem('token', (err, result) =>{
-                            if(result !=null){
-                                this.setState({ token: result });
-                                AsyncStorage.getItem('chits', (err, result) =>{
-                                    this.setState({ chit_drafts: JSON.parse(result) });
-                                    console.log('**** DEBUG ', this.state.chit_drafts)
-                                })
+                        onPress={() => {
+                            if(this.state.token !=null){
+                                this.props.navigation.navigate('Camera')
                             }
                             else{this.displayAlertMessage()}
-                        })}>
-                        <Text>VIEW DRAFT</Text>
+                        }}>
+                        <Text>POST PICTURE</Text>
                     </TouchableOpacity>
+                    
                 </View>
                 
-                <TouchableOpacity
-                    style={styles.new_chits_buttons}
-                    onPress={() => AsyncStorage.getItem('token', (err, result) =>{
-                        if(result !=null){
-                            this.props.navigation.navigate('Camera')
-                        }
-                        else{this.displayAlertMessage()}
-                    })}>
-                    <Text>POST PICTURE</Text>
-                </TouchableOpacity>
-
-
-                <Text>DRAFTS</Text>
-
                 
-                <FlatList
-                    data={this.state.chit_drafts}
-                    renderItem={({ item, index }) => this.displayData(item, index)}
-                    keyExtractor={({ item}, index) => 'following-list'+index}
-                />
+                <View>
+                    <Text>DRAFTS</Text>
+                    
+                    <FlatList
+                        data={this.state.chit_drafts}
+                        renderItem={({ item, index }) => this.displayData(item)}
+                        keyExtractor={({ item}, index) => 'chits-list-'+index}
+                    />
+                </View>
+
             </View>
         )
     }

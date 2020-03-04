@@ -146,6 +146,11 @@ export default styles = StyleSheet.create({
         textDecorationColor:'black'
     },
 
+    chit_draft:{
+        fontSize: 16,
+        marginBottom: 4
+    },
+
     //CAMERA PAGE
     camera_container:{ 
         flex: 1, 
