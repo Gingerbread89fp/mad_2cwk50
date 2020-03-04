@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Alert, FlatList } from 'react-native';
+import { Text, View, Image, Alert, FlatList, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import PhotoUpload from 'react-native-photo-upload';
 
@@ -12,10 +12,12 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: '',
       user_id: '',
       user_details: [],
       followers: [],
-      followings: []
+      followings: [],
+      profile_pic:''
     }
   }
 
@@ -41,6 +43,9 @@ class Profile extends Component {
         this.setState({ user_id: result });
         AsyncStorage.getItem('user', (err, result_details) => {
           this.setState({ user_details: JSON.parse(result_details) })
+        })
+        AsyncStorage.getItem('token', (err, result) =>{
+          this.setState({ token: result });
         })
       }
       else { 
@@ -90,10 +95,7 @@ class Profile extends Component {
               name={'account-minus'} 
               size={28} 
               color={'green'} 
-              onPress={() => AsyncStorage.getItem('token', (err, result) =>{
-                  this.setState({ token: result });
-                  this.unFollowUser(item.user_id)
-              })}/>
+              onPress={() => this.unFollowUser(item.user_id)}/>
         </View>
     )
   }
@@ -115,6 +117,23 @@ class Profile extends Component {
 
   componentDidMount() {
     this.getUserDetails();
+  }
+  
+  uploadProfilePicture(profile_pic){
+    return fetch('http://10.0.2.2:3333/api/v0.0.5/user/photo', {
+      method: 'POST',
+      headers: { 
+          "Content-Type": "application/json", 
+          "X-Authorization": JSON.parse(this.state.token)
+      },
+      body:{profile_pic}
+    })
+    .then((response) => {
+        Alert.alert("Picture added successfully")  
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
   }
 
   render() {
@@ -141,10 +160,42 @@ class Profile extends Component {
         </View>
 
         <View style={styles.page_content}>
-            <Image 
-              style={styles.image_profile} 
-              source={require('../assets/images/default_user.png')}
-            />
+            <PhotoUpload 
+              photoPickerTitle={'Select an image'}
+              format={"JPEG"}
+              quality={70}
+              onPhotoSelect={profile_pic =>{
+                if(profile_pic){
+                  this.uploadProfilePicture(profile_pic)
+                  this.setState({profile_pic: profile_pic})
+                  console.log('**** profile pic ', this.state.profile_pic)
+                }
+              }}
+            >
+              {this.state.profile_pic ? (
+                <Image 
+                  style={styles.image_profile}  
+                  source={{uri: this.state.profile_pic}} />
+              ) : (<Image 
+                style={styles.image_profile} 
+                source={require('../assets/images/default_user.png')}
+              />)}
+              {/* <Image 
+                style={styles.image_profile} 
+                source={require('../assets/images/default_user.png')}
+              /> */}
+            </PhotoUpload>
+
+
+            {/*<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              {this.state.profile_pic && (
+                <Image
+                  source={{ uri: profile_pic.uri }}
+                  style={{ width: 300, height: 300 }}
+                />
+              )}
+              <Button title="Choose Photo" onPress={this.uploadProfilePicture} />
+              </View>*/}
           
           <View>
             <Text style={styles.user_details}>First Name: {this.state.user_details.given_name}</Text>
