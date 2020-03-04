@@ -42,6 +42,8 @@ target 'mad_2cwk50_piana' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  pod 'react-native-image-resizer', :path => '../node_modules/react-native-image-resizer'
+
   target 'mad_2cwk50_pianaTests' do
     inherit! :search_paths
     # Pods for testing
