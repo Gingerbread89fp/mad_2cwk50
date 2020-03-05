@@ -50,7 +50,7 @@ class NewChits extends Component {
         )
     }
 
-    displayData(item) {
+    displayDraft(item) {
         return (
             <View style={styles.chit_layout}>
                 <Text style={styles.chit_draft}>{item}</Text>
@@ -59,18 +59,19 @@ class NewChits extends Component {
                         name={'file-document-edit-outline'} 
                         size={28} 
                         color={'green'} 
-                        onPress={()=> this.editDraft}/>
+                        onPress={()=> this.editDraft(item)}/>
                     <CustomIcon 
                         name={'delete-outline'} 
                         size={28} 
                         color={'green'} 
-                        onPress={()=> this.deleteDraft}/>
+                        onPress={()=> this.deleteDraft(item)}/>
                     <CustomIcon 
                         name={'send'} 
                         size={28} 
                         color={'green'} 
                         onPress={()=> {
                             this.setState({chit_content: item})
+                            //text will be displayed back into the input text and can be sent from there
                         }}/>
                     <CustomIcon 
                         name={'timetable'} 
@@ -97,69 +98,71 @@ class NewChits extends Component {
 
     render() {
         return (
-            <View style={styles.new_chit_page}>
-                <TextInput 
-                    style={styles.input_chit}
-                    value={this.state.chit_content}
-                    multiline={true}
-                    maxLength={141} //prevent users to write more than 141 chars
-                    onChangeText={(chit_content) => this.setState({ chit_content })}/>
+            <View style={styles.new_chit_page}> 
+                <FlatList
+                    extraData={this.state}
+                    data={this.state.chit_drafts}
+                    renderItem={({ item, index }) => this.displayDraft(item)}
+                    keyExtractor={({ item}, index) => 'chits-list-'+index}
+                    //in order to allow scrollable feature for the drafts and prevent warning from the use
+                    //of ScrollView with FlatList nested inside all the components above the draft
+                    //are rendered as list header components
+                    ListHeaderComponent={(
+                        <View>
+                            <TextInput 
+                                style={styles.input_chit}
+                                value={this.state.chit_content}
+                                multiline={true}
+                                maxLength={141} //prevent users to write more than 141 chars
+                                onChangeText={(chit_content) => this.setState({ chit_content })}/>
 
-                {/* display while typing how many char had been used*/}  
-                <Text>{this.state.chit_content.length}/141</Text> 
+                            {/*display while typing how many char had been used*/}
+                            <Text>{this.state.chit_content.length}/141</Text> 
+                            
+                            <View style={styles.new_chits_buttons_layout}>
+                                <TouchableOpacity
+                                    style={styles.new_chits_buttons}
+                                    onPress={() => {
+                                        if(this.state.token !=null){
+                                            this.postChits();
+                                        }
+                                        else{ this.displayAlertMessage() }
+                                    }}>
+                                    <Text>POST CHITS</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={styles.new_chits_buttons}
+                                    onPress={() => {
+                                        if(this.state.token !=null){
+                                            this.setState({
+                                                chit_drafts: this.state.chit_drafts.concat(this.state.chit_content),
+                                                chit_content: ''
+                                            })
+                                            Alert.alert('Draft saved')
+                                            AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
+                                        }
+                                        else{this.displayAlertMessage()}
+                                    }}>
+                                    <Text>SAVE DRAFT</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={styles.new_chits_buttons}
+                                    onPress={() => {
+                                        if(this.state.token !=null){
+                                            this.props.navigation.navigate('Camera')
+                                        }
+                                        else{this.displayAlertMessage()}
+                                    }}>
+                                    <Text>POST PICTURE</Text>
+                                </TouchableOpacity>
+                            </View>
+                                <Text style={styles.draft_title}>DRAFTS</Text>
+                        </View>
+                    )}
+                />
                 
-                <View style={styles.new_chits_buttons_layout}>
-                    <TouchableOpacity
-                        style={styles.new_chits_buttons}
-                        onPress={() => {
-                            if(this.state.token !=null){
-                                this.postChits();
-                            }
-                            else{ this.displayAlertMessage() }
-                        }}>
-                        <Text>POST CHITS</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={styles.new_chits_buttons}
-                        onPress={() => {
-                            if(this.state.token !=null){
-                                this.setState({
-                                    chit_drafts: this.state.chit_drafts.concat(this.state.chit_content),
-                                    chit_content: ''
-                                })
-                                Alert.alert('Draft saved')
-                                AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
-                            }
-                            else{this.displayAlertMessage()}
-                        }}>
-                        <Text>SAVE DRAFT</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={styles.new_chits_buttons}
-                        onPress={() => {
-                            if(this.state.token !=null){
-                                this.props.navigation.navigate('Camera')
-                            }
-                            else{this.displayAlertMessage()}
-                        }}>
-                        <Text>POST PICTURE</Text>
-                    </TouchableOpacity>
-                    
-                </View>
-                
-                
-                <View>
-                    <Text>DRAFTS</Text>
-                    
-                    <FlatList
-                        data={this.state.chit_drafts}
-                        renderItem={({ item, index }) => this.displayData(item)}
-                        keyExtractor={({ item}, index) => 'chits-list-'+index}
-                    />
-                </View>
-
             </View>
         )
     }
