@@ -59,7 +59,7 @@ class NewChits extends Component {
                         name={'file-document-edit-outline'} 
                         size={28} 
                         color={'green'} 
-                        onPress={()=> this.editDraft(item)}/>
+                        onPress={()=> this.props.navigation.navigate('EditDraft', {editDraft: item})}/>
                     <CustomIcon 
                         name={'delete-outline'} 
                         size={28} 
@@ -103,7 +103,7 @@ class NewChits extends Component {
             })
         })
     }
-
+    
     render() {
         return (
             <View style={styles.new_chit_page}> 

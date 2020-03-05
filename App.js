@@ -8,6 +8,7 @@ import Home from './screens/Home';
 import Search from './screens/Search';
 import Profile from './screens/Profile';
 import NewChits from './screens/NewChits';
+import EditDraft from './screens/EditDraft';
 import Camera from './screens/Camera';
 import UpdateProfile from './screens/UpdateProfile';
 
@@ -20,6 +21,7 @@ const AppNavigator = createStackNavigator({
           Home,
           NewChits,
           Camera,
+          EditDraft,
           Login,
           Register
         })
