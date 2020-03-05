@@ -49,7 +49,7 @@ class Home extends Component {
             })
     }
 
-    displayData(item) {
+    displayChitsList(item) {
         return (
             <View style={styles.chit_layout} key={item.chit_id}>
                 <Text style={styles.name_label}>{item.user.given_name}</Text>
@@ -67,7 +67,7 @@ class Home extends Component {
             <View>       
                 <FlatList
                     data={this.state.chitsList}
-                    renderItem={({ item, index }) => this.displayData(item, index)}
+                    renderItem={({ item, index }) => this.displayChitsList(item, index)}
                     keyExtractor={( {item}, index) => 'chit-list-'+index}
                 />
             </View>

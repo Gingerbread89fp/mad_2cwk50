@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Alert, FlatList, Button } from 'react-native';
+import { Text, View, Image, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import PhotoUpload from 'react-native-photo-upload';
 
@@ -180,23 +180,9 @@ class Profile extends Component {
                 style={styles.image_profile} 
                 source={require('../assets/images/default_user.png')}
               />)}
-              {/* <Image 
-                style={styles.image_profile} 
-                source={require('../assets/images/default_user.png')}
-              /> */}
             </PhotoUpload>
 
 
-            {/*<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              {this.state.profile_pic && (
-                <Image
-                  source={{ uri: profile_pic.uri }}
-                  style={{ width: 300, height: 300 }}
-                />
-              )}
-              <Button title="Choose Photo" onPress={this.uploadProfilePicture} />
-              </View>*/}
-          
           <View>
             <Text style={styles.user_details}>First Name: {this.state.user_details.given_name}</Text>
             <Text style={styles.user_details}>Last Name: {this.state.user_details.family_name}</Text>
@@ -207,15 +193,17 @@ class Profile extends Component {
           <View style={styles.profile_follow}>
             <Text style={styles.follow_title}>Followers ({this.state.followers.length})</Text>
             <FlatList
-            data={this.state.followers}
-            renderItem={({ item, index }) => this.displayData(item)}
-            keyExtractor={({ item}, index) => 'followers-list'+index}
+              extraData={this.state}
+              data={this.state.followers}
+              renderItem={({ item, index }) => this.displayData(item)}
+              keyExtractor={({ item}, index) => 'followers-list'+index}
             />
           </View>
           
           <View style={styles.profile_follow}>
             <Text style={styles.follow_title}>Following ({this.state.followings.length})</Text>
             <FlatList
+              extraData={this.state}
               data={this.state.followings}
               renderItem={({ item, index }) => this.displayData(item)}
               keyExtractor={({ item}, index) => 'following-list'+index}
