@@ -45,7 +45,7 @@ class NewChits extends Component {
         const { navigation } = this.props;
         Alert.alert(
             'Login error',
-            'Please login to post/save/view chits',
+            'Please login to post/save chits or upload a picture',
             [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
         )
     }
@@ -103,7 +103,7 @@ class NewChits extends Component {
             })
         })
     }
-    
+
     render() {
         return (
             <View style={styles.new_chit_page}> 
