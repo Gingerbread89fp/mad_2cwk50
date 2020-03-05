@@ -146,9 +146,18 @@ export default styles = StyleSheet.create({
         textDecorationColor:'black'
     },
 
+    draft_title:{
+        fontSize: 24,
+        marginBottom: 4
+    },
+
     chit_draft:{
         fontSize: 16,
-        marginBottom: 4
+        marginBottom: 8,
+        paddingBottom: 12,
+        borderBottomColor: 'green',
+        borderBottomWidth: 1,
+        borderStyle: "solid"
     },
 
     //CAMERA PAGE
