@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, View, TextInput, Alert, FlatList } from 'react-native';
+import { Text, View, TextInput, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import CustomIcon from '../app_components/customizedIconButton';
 
@@ -128,19 +128,21 @@ class NewChits extends Component {
                             <Text>{this.state.chit_content.length}/141</Text> 
                             
                             <View style={styles.new_chits_buttons_layout}>
-                                <TouchableOpacity
-                                    style={styles.new_chits_buttons}
+                                <CustomIcon 
+                                    name={'send'} 
+                                    size={32} 
+                                    color={'green'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
                                             this.postChits();
                                         }
                                         else{ this.displayAlertMessage() }
-                                    }}>
-                                    <Text>POST CHITS</Text>
-                                </TouchableOpacity>
+                                    }} />
 
-                                <TouchableOpacity
-                                    style={styles.new_chits_buttons}
+                                <CustomIcon 
+                                    name={'content-save'} 
+                                    size={32} 
+                                    color={'green'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
                                             this.setState({
@@ -151,20 +153,29 @@ class NewChits extends Component {
                                             AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
                                         }
                                         else{this.displayAlertMessage()}
-                                    }}>
-                                    <Text>SAVE DRAFT</Text>
-                                </TouchableOpacity>
+                                    }} />
 
-                                <TouchableOpacity
-                                    style={styles.new_chits_buttons}
+                                <CustomIcon 
+                                    name={'image-outline'} 
+                                    size={32} 
+                                    color={'green'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
                                             this.props.navigation.navigate('Camera')
                                         }
                                         else{this.displayAlertMessage()}
-                                    }}>
-                                    <Text>POST PICTURE</Text>
-                                </TouchableOpacity>
+                                    }} />
+                                
+                                <CustomIcon 
+                                    name={'map-marker-outline'} 
+                                    size={32} 
+                                    color={'green'} 
+                                    onPress={() => {
+                                        if(this.state.token !=null){
+                                            this.props.navigation.navigate('Camera')
+                                        }
+                                        else{this.displayAlertMessage()}
+                                    }} />
                             </View>
                                 <Text style={styles.draft_title}>DRAFTS</Text>
                         </View>
