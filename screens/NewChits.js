@@ -84,6 +84,14 @@ class NewChits extends Component {
         )
     }
 
+    deleteDraft(item){
+        var list = this.state.chit_drafts;
+        var position = list.indexOf(item);
+        list.splice(position, 1)
+        this.setState({chit_drafts: list})
+        AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts))
+    }
+
     componentDidMount(){
         AsyncStorage.getItem('token', (err, result) =>{
             this.setState({token: result})
