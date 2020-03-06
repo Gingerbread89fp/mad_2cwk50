@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import Geolocation from '@react-native-community/geolocation';
 import CustomIcon from '../app_components/customizedIconButton';
 
 import styles from '../styles/app_style'
@@ -12,6 +13,8 @@ class NewChits extends Component {
         this.state = {
             token: '',
             chit_content: '',
+            longitude: 0,
+            latitude:0,
             chit_drafts:[]
         }
     }
@@ -31,7 +34,11 @@ class NewChits extends Component {
             },
             body: JSON.stringify({
                 timestamp: 0,
-                chit_content: this.state.chit_content
+                chit_content: this.state.chit_content,
+                location: {
+                    longitude: this.state.longitude,
+                    latitude: this.state.latitude
+                }
             })
             
         })
@@ -53,6 +60,7 @@ class NewChits extends Component {
     displayDraft(item) {
         return (
             <View style={styles.chit_layout}>
+                <Text>Your position: {item.latitude}, {item.longitude}</Text>
                 <Text style={styles.chit_draft}>{item}</Text>
                 <View style={{flexDirection:'row', flex:1}}>
                     <CustomIcon 
@@ -101,6 +109,7 @@ class NewChits extends Component {
             this.setState({
                 chit_drafts: this.state.chit_drafts.concat(chits)
             })
+            console.log('drafts', this.state.chit_drafts)
         })
     }
 
@@ -172,7 +181,15 @@ class NewChits extends Component {
                                     color={'green'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
-                                            this.props.navigation.navigate('Camera')
+                                            Alert.alert('your location had been added to your chit')
+                                            Geolocation.getCurrentPosition(coords => {
+                                                console.log(coords)
+                                                this.setState({
+                                                    latitude: coords.latitude,
+                                                    longitude: coords.longitude
+                                                })
+
+                                            });
                                         }
                                         else{this.displayAlertMessage()}
                                     }} />
