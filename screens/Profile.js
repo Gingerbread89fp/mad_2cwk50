@@ -17,7 +17,8 @@ class Profile extends Component {
       user_details: [],
       followers: [],
       followings: [],
-      profile_pic:''
+      profile_pic:'',
+      default_avatar: require('../assets/images/default_user.png')
     }
   }
 
@@ -60,8 +61,19 @@ class Profile extends Component {
         )
       }
     })
+    .then(() => this.getProfilePicture())
     .then(() => this.getFollowers())
     .then(() => this.getFollowing())
+  }
+
+  getProfilePicture(){
+    return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.user_id+'/photo')
+    .then((response) =>{
+      console.log('pic', response)
+      this.setState({
+        profile_pic: response.url
+      })
+    })
   }
 
   getFollowers() {
@@ -113,31 +125,38 @@ class Profile extends Component {
       .then((response) => {
           Alert.alert("user unfollowed successfully ")  
       })
+      .then(()=>{
+        this.getFollowers();
+        this.getFollowing();
+      })
       .catch((error)=>{
       console.log(error)
       })
   }
 
-  componentDidMount() {
-    this.getUserDetails();
-  }
-  
-  uploadProfilePicture(profile_pic){
+  uploadProfilePicture(img_selected){
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user/photo', {
       method: 'POST',
       headers: { 
-          "Content-Type": "application/json", 
+          "Content-Type": "image/jpeg", 
           "X-Authorization": JSON.parse(this.state.token)
       },
-      body:{profile_pic}
+      body: img_selected
     })
     .then((response) => {
-        Alert.alert("Picture added successfully")  
+        Alert.alert("Picture changed successfully")  
     })
     .catch((error)=>{
       console.log(error)
     })
   }
+
+  componentDidMount() {
+    this.getUserDetails();
+    this.getFollowers();
+    this.getFollowing();
+  }
+  
 
   render() {
     return (
@@ -165,24 +184,20 @@ class Profile extends Component {
         <View style={styles.page_content}>
             <PhotoUpload 
               photoPickerTitle={'Select an image'}
-              format={"JPEG"}
+              format={'JPEG'}
               quality={70}
-              onPhotoSelect={profile_pic =>{
-                if(profile_pic){
-                  this.uploadProfilePicture(profile_pic)
-                  this.setState({profile_pic: profile_pic})
-                  console.log('**** profile pic ', this.state.profile_pic)
+              onPhotoSelect={img_selected =>{
+                if(img_selected){
+                  console.log('img selected', img_selected)
+                  this.uploadProfilePicture(img_selected)
                 }
               }}
             >
-              {this.state.profile_pic ? (
-                <Image 
-                  style={styles.image_profile}  
-                  source={{uri: this.state.profile_pic}} />
-              ) : (<Image 
+           <Image 
                 style={styles.image_profile} 
-                source={require('../assets/images/default_user.png')}
-              />)}
+                //if a profile pic is set than use that one otherwise keep the default image  
+                source={this.state.profile_pic ? {uri: this.state.profile_pic} : this.state.default_avatar}
+            />
             </PhotoUpload>
 
 
