@@ -91,7 +91,7 @@ export default styles = StyleSheet.create({
 
     //names in Home + Search
     name_label: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight:'bold',
         flex:1
     },
@@ -102,6 +102,8 @@ export default styles = StyleSheet.create({
     },
 
     chit_layout:{
+        flex:1,
+        flexDirection: "row", 
         backgroundColor:'white',
         borderColor: 'green',
         borderStyle: 'solid',
@@ -112,7 +114,13 @@ export default styles = StyleSheet.create({
         marginHorizontal: 12,
         elevation:4
     },
-    
+    chit_text:{
+        marginRight:20 
+    },
+    chit_location:{
+        fontSize:12,
+        fontStyle:'italic'
+    },
     
     //NEW CHIT PAGE
     input_chit:{
@@ -132,7 +140,7 @@ export default styles = StyleSheet.create({
 
     new_chits_buttons_layout:{
         flexDirection:'row',
-        justifyContent:'space-between',
+        justifyContent:'space-around',
         marginVertical:12,
     },
     new_chits_buttons:{

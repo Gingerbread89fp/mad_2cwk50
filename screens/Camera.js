@@ -34,7 +34,7 @@ class Camera extends Component {
                 },
                 body: picture
             })
-            .then((reposnse) => Alert.alert('Image uploaded successfully'))
+            .then((reposnse) => Alert.alert('Image added to your chit successfully'))
             .then((response) => this.props.navigation.navigate('Home'))
             .catch((error) => {
                 console.log(error)
