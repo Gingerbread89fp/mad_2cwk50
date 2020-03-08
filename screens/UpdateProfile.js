@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, TouchableOpacity } from 'react-native';
-import CustomFormInput from '../app_components/form'
+import CustomFormInput from '../app_components/inputField'
 
 import styles from '../styles/app_style'
 import AsyncStorage from '@react-native-community/async-storage';
