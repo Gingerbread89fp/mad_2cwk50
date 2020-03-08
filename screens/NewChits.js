@@ -104,13 +104,15 @@ class NewChits extends Component {
         AsyncStorage.getItem('token', (err, result) =>{
             this.setState({token: result})
         })
-        AsyncStorage.getItem('chits', (err, chit_r)=>{
-            let chits = JSON.parse(chit_r)
-            this.setState({
-                chit_drafts: this.state.chit_drafts.concat(chits)
+        {this.state.chit_draft ? (
+            AsyncStorage.getItem('chits', (err, chit_r)=>{
+                let chits = JSON.parse(chit_r)
+                this.setState({
+                    chit_drafts: this.state.chit_drafts.concat(chits)
+                })
+                console.log('drafts', this.state.chit_drafts)
             })
-            console.log('drafts', this.state.chit_drafts)
-        })
+        ) : null}
     }
 
     render() {
