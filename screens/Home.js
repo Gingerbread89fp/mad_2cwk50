@@ -55,7 +55,7 @@ class Home extends Component {
                 <Text style={styles.name_label}>{item.user.given_name}</Text>
                 <Text>{item.chit_content}</Text>
                 {item.location ? 
-                    (<Text>Your position: {item.location.latitude}, {item.location.longitude}</Text>) 
+                    (<Text style={styles.chit_location}>Your position: {item.location.latitude}, {item.location.longitude}</Text>) 
                     : null}
             </View>
         )
