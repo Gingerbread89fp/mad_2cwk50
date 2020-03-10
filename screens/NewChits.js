@@ -59,7 +59,7 @@ class NewChits extends Component {
 
     displayDraft(item) {
         return (
-            <View style={styles.chit_layout}>
+            <View style={styles.draft_container}>
                 <Text>Your position: {item.latitude}, {item.longitude}</Text>
                 <Text style={styles.chit_draft}>{item}</Text>
                 <View style={{flexDirection:'row', flex:1}}>
@@ -104,15 +104,18 @@ class NewChits extends Component {
         AsyncStorage.getItem('token', (err, result) =>{
             this.setState({token: result})
         })
-        {this.state.chit_draft ? (
-            AsyncStorage.getItem('chits', (err, chit_r)=>{
-                let chits = JSON.parse(chit_r)
+        AsyncStorage.getItem('chits', (err, chit_r)=>{
+            if(chit_r != null){
+                //let chits = JSON.parse(chit_r)
+                //console.log('chits from storage', chits)
                 this.setState({
-                    chit_drafts: this.state.chit_drafts.concat(chits)
+                    //chit_drafts: this.state.chit_drafts.concat(chits)
+                    chit_drafts: JSON.parse(chit_r)
                 })
-                console.log('drafts', this.state.chit_drafts)
-            })
-        ) : null}
+                console.log('drafts from storage', this.state.chit_drafts)
+            }
+            else{chit_drafts= ''}
+        })
     }
 
     render() {
@@ -154,14 +157,15 @@ class NewChits extends Component {
                                     name={'content-save'} 
                                     size={32} 
                                     color={'green'} 
-                                    onPress={() => {
+                                    onPress={async() => {
                                         if(this.state.token !=null){
                                             this.setState({
                                                 chit_drafts: this.state.chit_drafts.concat(this.state.chit_content),
-                                                chit_content: ''
+                                                chit_content:''
                                             })
+                                            await AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
+                                            console.log('draft saved', this.state.chit_drafts)
                                             Alert.alert('Draft saved')
-                                            AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
                                         }
                                         else{this.displayAlertMessage()}
                                     }} />
@@ -183,15 +187,15 @@ class NewChits extends Component {
                                     color={'green'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
-                                            Alert.alert('your location had been added to your chit')
                                             Geolocation.getCurrentPosition(coords => {
                                                 console.log(coords)
                                                 this.setState({
                                                     latitude: coords.latitude,
                                                     longitude: coords.longitude
                                                 })
-
+                                                
                                             });
+                                            Alert.alert('your location had been added to your chit')
                                         }
                                         else{this.displayAlertMessage()}
                                     }} />
