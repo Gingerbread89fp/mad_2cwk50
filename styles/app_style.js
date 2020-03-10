@@ -101,25 +101,33 @@ export default styles = StyleSheet.create({
         fontWeight:'bold', 
     },
 
-    chit_layout:{
+    chit_container:{
         flex:1,
         flexDirection: "row", 
         backgroundColor:'white',
         borderColor: 'green',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderRadius: 2,
+        borderRadius: 8,
         padding: 10,
         marginBottom: 8,
         marginHorizontal: 12,
         elevation:4
     },
+    chit_content:{
+        flexDirection:'column', 
+        width: 320
+    },
     chit_text:{
-        marginRight:20 
+        flexWrap:'wrap' 
     },
     chit_location:{
         fontSize:12,
-        fontStyle:'italic'
+        fontStyle:'italic',
+        marginTop: 4,
+        borderTopColor: 'gray',
+        borderTopWidth: 1,
+        paddingTop: 4
     },
     
     //NEW CHIT PAGE
@@ -154,6 +162,19 @@ export default styles = StyleSheet.create({
         textDecorationColor:'black'
     },
 
+    draft_container:{
+        flex:1,
+        flexDirection: "column", 
+        backgroundColor:'white',
+        borderColor: 'green',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderRadius: 4,
+        padding: 10,
+        marginBottom: 8,
+        marginHorizontal: 12,
+        elevation:4
+    },
     draft_title:{
         fontSize: 24,
         marginBottom: 4
