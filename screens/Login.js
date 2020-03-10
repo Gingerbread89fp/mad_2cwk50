@@ -40,23 +40,24 @@ class Login extends Component {
     .then((response) => this.getUserDetails())
     .catch((error) => {
       console.log(error)
+      Alert.alert('Login Error', 'Email or password wrong. Please try again or register if you haven\'t signed up yet')
     })
   }
 
   getUserDetails(){
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.user_id)
     .then((response) => response.json())
-        .then((responseJson) => {
-            this.setState({
-                given_name: responseJson.given_name,
-                family_name: responseJson.family_name,
-                email: responseJson.email
-            });
-            AsyncStorage.setItem('user', JSON.stringify(responseJson));
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+      .then((responseJson) => {
+          this.setState({
+              given_name: responseJson.given_name,
+              family_name: responseJson.family_name,
+              email: responseJson.email
+          });
+          AsyncStorage.setItem('user', JSON.stringify(responseJson));
+      })
+      .catch((error) => {
+          console.log(error);
+      })
   }
 
   render() {
