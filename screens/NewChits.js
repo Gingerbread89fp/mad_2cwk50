@@ -13,8 +13,8 @@ class NewChits extends Component {
         this.state = {
             token: '',
             chit_content: '',
-            longitude: 0,
-            latitude:0,
+            longitude: '',
+            latitude:'',
             chit_drafts:[]
         }
     }
@@ -137,9 +137,9 @@ class NewChits extends Component {
                                 multiline={true}
                                 maxLength={141} //prevent users to write more than 141 chars
                                 onChangeText={(chit_content) => this.setState({ chit_content })}/>
-
+                            <Text>Your position: {this.state.latitude} {this.state.longitude}</Text>
                             {/*display while typing how many char had been used*/}
-                            <Text>{this.state.chit_content.length}/141</Text> 
+                            <Text>Characters available: {141-this.state.chit_content.length}</Text> 
                             
                             <View style={styles.new_chits_buttons_layout}>
                                 <CustomIcon 
@@ -187,15 +187,13 @@ class NewChits extends Component {
                                     color={'green'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
-                                            Geolocation.getCurrentPosition(coords => {
-                                                console.log(coords)
+                                            Geolocation.getCurrentPosition(location => {
                                                 this.setState({
-                                                    latitude: coords.latitude,
-                                                    longitude: coords.longitude
+                                                    latitude: location.coords.latitude,
+                                                    longitude: location.coords.longitude
                                                 })
-                                                
                                             });
-                                            Alert.alert('your location had been added to your chit')
+                                            Alert.alert('Geolocation','Your location had been added to your chit')
                                         }
                                         else{this.displayAlertMessage()}
                                     }} />
