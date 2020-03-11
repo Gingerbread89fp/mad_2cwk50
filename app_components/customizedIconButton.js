@@ -13,7 +13,7 @@ export default class CustomIcon extends Component{
 
     render(){
       return(
-        <View style={styles.icon_home}>
+        <View style={styles.custom_icon_layout}>
           <TouchableOpacity onPress={this.props.onPress}>
             <MaterialCommunityIcons 
               name={this.props.name} 

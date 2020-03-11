@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Geolocation from '@react-native-community/geolocation';
 import CustomIcon from '../app_components/customizedIconButton';
 
-import styles from '../styles/app_style'
+import styles from '../styles/new_chit_style'
 
 class NewChits extends Component {
 
@@ -13,8 +13,8 @@ class NewChits extends Component {
         this.state = {
             token: '',
             chit_content: '',
-            longitude: '',
-            latitude:'',
+            longitude: 0,
+            latitude:0,
             chit_drafts:[]
         }
     }
@@ -60,23 +60,23 @@ class NewChits extends Component {
     displayDraft(item) {
         return (
             <View style={styles.draft_container}>
-                <Text>Your position: {item.latitude}, {item.longitude}</Text>
+                <Text>Your position: {this.state.latitude}, {this.state.longitude}</Text>
                 <Text style={styles.chit_draft}>{item}</Text>
                 <View style={{flexDirection:'row', flex:1}}>
                     <CustomIcon 
                         name={'file-document-edit-outline'} 
                         size={28} 
-                        color={'green'} 
+                        color={'#1F5673'} 
                         onPress={()=> this.props.navigation.navigate('EditDraft', {editDraft: item})}/>
                     <CustomIcon 
                         name={'delete-outline'} 
                         size={28} 
-                        color={'green'} 
+                        color={'#1F5673'} 
                         onPress={()=> this.deleteDraft(item)}/>
                     <CustomIcon 
                         name={'send'} 
                         size={28} 
-                        color={'green'} 
+                        color={'#1F5673'} 
                         onPress={()=> {
                             this.setState({chit_content: item})
                             //text will be displayed back into the input text and can be sent from there
@@ -84,7 +84,7 @@ class NewChits extends Component {
                     <CustomIcon 
                         name={'timetable'} 
                         size={28} 
-                        color={'green'} 
+                        color={'#1F5673'} 
                         onPress={()=> this.deleteDraft}/>
                 </View>
                 
@@ -100,6 +100,9 @@ class NewChits extends Component {
         AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts))
     }
 
+    getDraft(){
+        
+    }
     componentDidMount(){
         AsyncStorage.getItem('token', (err, result) =>{
             this.setState({token: result})
@@ -115,7 +118,7 @@ class NewChits extends Component {
                 console.log('drafts from storage', this.state.chit_drafts)
             }
             else{chit_drafts= ''}
-        })
+        })  
     }
 
     render() {
@@ -145,7 +148,7 @@ class NewChits extends Component {
                                 <CustomIcon 
                                     name={'send'} 
                                     size={32} 
-                                    color={'green'} 
+                                    color={'#1F5673'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
                                             this.postChits();
@@ -156,7 +159,7 @@ class NewChits extends Component {
                                 <CustomIcon 
                                     name={'content-save'} 
                                     size={32} 
-                                    color={'green'} 
+                                    color={'#1F5673'} 
                                     onPress={async() => {
                                         if(this.state.token !=null){
                                             this.setState({
@@ -173,7 +176,7 @@ class NewChits extends Component {
                                 <CustomIcon 
                                     name={'image-outline'} 
                                     size={32} 
-                                    color={'green'} 
+                                    color={'#1F5673'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
                                             this.props.navigation.navigate('Camera')
@@ -184,7 +187,7 @@ class NewChits extends Component {
                                 <CustomIcon 
                                     name={'map-marker-outline'} 
                                     size={32} 
-                                    color={'green'} 
+                                    color={'#1F5673'} 
                                     onPress={() => {
                                         if(this.state.token !=null){
                                             Geolocation.getCurrentPosition(location => {

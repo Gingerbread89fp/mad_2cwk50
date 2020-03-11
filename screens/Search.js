@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 
-import styles from '../styles/app_style';
+import styles from '../styles/search_style';
 import CustomIcon from '../app_components/customizedIconButton';
 
 class Search extends Component{
@@ -16,12 +16,6 @@ class Search extends Component{
             isFollowed: false
         }
     }
-
-    static navigationOptions = ({
-        title: 'Search',
-        headerTitleStyle: styles.page_title,
-        headerStyle: {height: 64, marginBottom: 12}
-    });
 
     searchUsers() {
         return fetch('http://10.0.2.2:3333/api/v0.0.5/search_user?q='+this.state.input_text)
@@ -50,31 +44,12 @@ class Search extends Component{
             <View style={styles.page_content}>
                 
                 <Text style={styles.name_label}>{item.given_name} {item.family_name}</Text>
-                {isFollowed ? (
-                    <CustomIcon 
-                        name={'account-minus'} 
-                        size={36} 
-                        color={'green'} 
-                        onPress={() => {
-                            if(this.state.token !=null){
-                                this.unFollowUser(item.user_id)
-                            }
-                            else{
-                                const { navigation } = this.props;
-                                Alert.alert(
-                                    'Login error',
-                                    'Please login to follow other chitters',
-                                    [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
-                                )
-                            }
-                        }}
-                    />) : (
+                
                     <CustomIcon 
                     name={'account-plus'} 
                     size={36} 
-                    color={'green'} 
+                    color={'#1F5673'} 
                     onPress={() => this.followUser(item.user_id)} />
-                )}
             </View>
         )
     }
@@ -115,35 +90,38 @@ class Search extends Component{
 
     render(){
         return(
-            <View>
-
-                <View style={styles.page_container}>
+            <View style={{backgroundColor: '#B9B8D3'}}>
+                
+                <View style={styles.header}>
                     <Text style={styles.page_title}>Search</Text>
                 </View>
 
                 <View style={styles.page_container}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Search other chitters...'
-                        value={this.state.input_text}
-                        onChangeText={(input_text) => this.setState({ input_text })} />
 
-                    <CustomIcon 
-                        name={'magnify'} 
-                        size={36} 
-                        color={'green'} 
-                        onPress={() => this.searchUsers()}/>
+                    <View style={styles.page_content}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Search other chitters...'
+                            value={this.state.input_text}
+                            onChangeText={(input_text) => this.setState({ input_text })} />
+
+                        <CustomIcon 
+                            name={'magnify'} 
+                            size={36} 
+                            color={'#1F5673'} 
+                            onPress={() => this.searchUsers()}/>
+                    </View>
+                    
+
+                    <View>
+                        <FlatList
+                            data = {this.state.userList}
+                            renderItem={({item, index}) => this.displayData(item)}
+                            keyExtractor={({given_name}, index) => given_name}
+                        />
+                    </View>
+
                 </View>
-                
-
-                <View>
-                    <FlatList
-                        data = {this.state.userList}
-                        renderItem={({item, index}) => this.displayData(item)}
-                        keyExtractor={({given_name}, index) => given_name}
-                    />
-                </View>
-
             </View>
         )
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Alert, TouchableOpacity } from 'react-native';
 import CustomFormInput from '../app_components/inputField'
 
-import styles from '../styles/app_style'
+import styles from '../styles/profile_style'
 import AsyncStorage from '@react-native-community/async-storage';
 
 class UpdateProfile extends Component{
@@ -20,8 +20,8 @@ class UpdateProfile extends Component{
 
   static navigationOptions={
     title: 'Update details',
-    headerTitleStyle: styles.page_title,
-    headerStyle: {height: 64, marginBottom: 12},
+    headerTitleStyle: styles.title,
+    headerStyle: {height: 64},
   }
 
   getUserDetails() {
@@ -73,40 +73,44 @@ class UpdateProfile extends Component{
 
   render(){
     return(
-      <View style={styles.details_form}>
+      <View style={{backgroundColor: '#B9B8D3'}}>
 
-        <CustomFormInput 
-            labelTitle={'First Name:'}
-            value={this.state.given_name}
-            onChangeText={(given_name) => this.setState({given_name})}
-        />
+        <View style={styles.page_container}>
+            <CustomFormInput 
+                labelTitle={'First Name:'}
+                value={this.state.given_name}
+                placeholder={this.state.given_name}
+                onChangeText={(given_name) => this.setState({given_name})}
+            />
 
-        <CustomFormInput 
-            labelTitle={'Last Name:'}
-            value={this.state.family_name}
-            placeholder={this.state.family_name}
-            onChangeText={(family_name)=>this.setState({family_name})}
-        />
+            <CustomFormInput 
+                labelTitle={'Last Name:'}
+                value={this.state.family_name}
+                placeholder={this.state.family_name}
+                onChangeText={(family_name)=>this.setState({family_name})}
+            />
 
-        <CustomFormInput 
-            labelTitle={'Email:'}
-            value={this.state.email}
-            onChangeText={(email)=>this.setState({email})}
-        />
+            <CustomFormInput 
+                labelTitle={'Email:'}
+                value={this.state.email}
+                placeholder={this.state.email}
+                onChangeText={(email)=>this.setState({email})}
+            />
 
-        <CustomFormInput 
-            labelTitle={'Password:'}
-            value={this.state.password}
-            onChangeText={(password)=>this.setState({password})}
-            secureTextEntry={true}
-        />
-        
-        <TouchableOpacity
-          style={styles.button_style} 
-          onPress={()=> this.updateProfile()}>
-              <Text>UPDATE DETAILS</Text>
-        </TouchableOpacity>
+            <CustomFormInput 
+                labelTitle={'Password:'}
+                value={this.state.password}
+                onChangeText={(password)=>this.setState({password})}
+                secureTextEntry={true}
+            />
+            
+            <TouchableOpacity
+              style={styles.button_style} 
+              onPress={()=> this.updateProfile()}>
+                  <Text>UPDATE DETAILS</Text>
+            </TouchableOpacity>
 
+          </View>
       </View>
     )
 

@@ -38,13 +38,15 @@ export default styles = StyleSheet.create({
     },
 
     form_input:{
-        alignItems:'stretch',
-        borderColor: 'gray',
+        alignItems:'center',
+        borderColor: '#B9B8D3',
         borderStyle: 'solid',
         borderWidth: 1,
         padding: 2,
         width: 300,
-        marginBottom: 20,
+        height: 48,
+        borderRadius: 8,
+        marginBottom: 20
     },
 
     //LOGIN PAGE STYLE
@@ -82,154 +84,9 @@ export default styles = StyleSheet.create({
         marginBottom: 20
     },
 
-    //HOME PAGE
-    icon_home:{
+    custom_icon_layout:{
         marginHorizontal: 8, 
         flexDirection: "row", 
         justifyContent: "space-evenly"    
-    },
-
-    //names in Home + Search
-    name_label: {
-        fontSize: 18,
-        fontWeight:'bold',
-        flex:1
-    },
-
-    user_details:{
-        fontSize: 16,
-        fontWeight:'bold', 
-    },
-
-    chit_container:{
-        flex:1,
-        flexDirection: "row", 
-        backgroundColor:'white',
-        borderColor: 'green',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderRadius: 8,
-        padding: 10,
-        marginBottom: 8,
-        marginHorizontal: 12,
-        elevation:4
-    },
-    chit_content:{
-        flexDirection:'column', 
-        width: 320
-    },
-    chit_text:{
-        flexWrap:'wrap' 
-    },
-    chit_location:{
-        fontSize:12,
-        fontStyle:'italic',
-        marginTop: 4,
-        borderTopColor: 'gray',
-        borderTopWidth: 1,
-        paddingTop: 4
-    },
-    
-    //NEW CHIT PAGE
-    input_chit:{
-        borderColor: 'gray',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        padding: 2,
-        width: 380,
-        height: 80
-    },
-
-    new_chit_page:{
-        alignContent:'center',
-        flexDirection:'column',
-        marginHorizontal:12
-    },
-
-    new_chits_buttons_layout:{
-        flexDirection:'row',
-        justifyContent:'space-around',
-        marginVertical:12,
-    },
-    new_chits_buttons:{
-        marginRight:8,
-        borderWidth:2,
-        borderColor: 'green',
-        height: 32,
-        width: 112,
-        justifyContent:'center',
-        alignItems:'center',
-        textDecorationColor:'black'
-    },
-
-    draft_container:{
-        flex:1,
-        flexDirection: "column", 
-        backgroundColor:'white',
-        borderColor: 'green',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderRadius: 4,
-        padding: 10,
-        marginBottom: 8,
-        marginHorizontal: 12,
-        elevation:4
-    },
-    draft_title:{
-        fontSize: 24,
-        marginBottom: 4
-    },
-
-    chit_draft:{
-        fontSize: 16,
-        marginBottom: 8,
-        paddingBottom: 12,
-        borderBottomColor: 'green',
-        borderBottomWidth: 1,
-        borderStyle: "solid"
-    },
-
-    //CAMERA PAGE
-    camera_container:{ 
-        flex: 1, 
-        flexDirection: 'column' 
-    },
-
-    camera_button_container: { 
-        flex: 0, 
-        flexDirection: 'row', 
-        justifyContent: 'center',
-        backgroundColor: 'black' 
-    },
-
-
-    //PROFILE PAGE
-    image_profile:{
-        width: 128,
-        height: 128, 
-        borderRadius: 64, 
-        borderWidth: 1,
-        borderColor: 'gray',
-        marginTop: 20,
-        marginBottom: 20,
-        marginHorizontal: 8
-    },
-
-    profile_follow:{
-        flexDirection:'column',
-        justifyContent: 'space-around',
-        marginHorizontal:20,
-        padding:8,
-        width: '50%'
-    },
-    follow_title:{
-        fontSize: 32,
-        fontWeight:'bold',
-        marginBottom:6
-    },
-    name_follow: {
-        fontSize: 18,
-        fontWeight:'bold',
-        flex:1
     }
 })

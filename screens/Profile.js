@@ -5,7 +5,9 @@ import PhotoUpload from 'react-native-photo-upload';
 
 import CustomIcon from '../app_components/customizedIconButton';
 
-import styles from '../styles/app_style'
+import styles from '../styles/profile_style'
+
+var default_avatar= require('../assets/images/default_user.png')
 
 class Profile extends Component {
 
@@ -18,7 +20,7 @@ class Profile extends Component {
       followers: [],
       followings: [],
       profile_pic:'',
-      default_avatar: require('../assets/images/default_user.png')
+      
     }
   }
 
@@ -109,7 +111,7 @@ class Profile extends Component {
             <CustomIcon 
               name={'account-minus'} 
               size={28} 
-              color={'green'} 
+              color={'#1F5673'} 
               onPress={() => this.unFollowUser(item.user_id)}/>
         </View>
     )
@@ -138,7 +140,7 @@ class Profile extends Component {
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user/photo', {
       method: 'POST',
       headers: { 
-          "Content-Type": "image/jpeg", 
+          "Content-Type": "image/png", 
           "X-Authorization": JSON.parse(this.state.token)
       },
       body: img_selected
@@ -160,74 +162,76 @@ class Profile extends Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.page_container}>
-          <Text style={styles.page_title}>Profile</Text>
-
-          <CustomIcon
-            name={'logout'}
-            size={40}
-            color={'green'}
-            onPress={() => this.logout()}
-          />
-        </View>
-
-        <View style={styles.page_container}>
-          <CustomIcon
-              name={'account-edit'}
+      <View style={{backgroundColor: '#B9B8D3'}}>
+        
+        <View style={styles.header}>
+          <Text style={styles.title}>Profile</Text>
+          <View style={styles.icon_header}>  
+            <CustomIcon
+                name={'account-edit'}
+                size={40}
+                color={'#1F5673'}
+                onPress={() => this.props.navigation.navigate('UpdateProfile')}
+            />
+            <CustomIcon
+              name={'logout'}
               size={40}
-              color={'green'}
-              onPress={() => this.props.navigation.navigate('UpdateProfile')}
-          />
-        </View>
-
-        <View style={styles.page_content}>
-            <PhotoUpload 
-              photoPickerTitle={'Select an image'}
-              format={'JPEG'}
-              quality={70}
-              onPhotoSelect={img_selected =>{
-                if(img_selected){
-                  console.log('img selected', img_selected)
-                  this.uploadProfilePicture(img_selected)
-                }
-              }}
-            >
-           <Image 
-                style={styles.image_profile} 
-                //if a profile pic is set than use that one otherwise keep the default image  
-                source={this.state.profile_pic ? {uri: this.state.profile_pic} : this.state.default_avatar}
-            />
-            </PhotoUpload>
-
-
-          <View>
-            <Text style={styles.user_details}>First Name: {this.state.user_details.given_name}</Text>
-            <Text style={styles.user_details}>Last Name: {this.state.user_details.family_name}</Text>
-            <Text style={styles.user_details}>Email: {this.state.user_details.email}</Text>        
-          </View>
-        </View>
-
-          <View style={styles.profile_follow}>
-            <Text style={styles.follow_title}>Followers ({this.state.followers.length})</Text>
-            <FlatList
-              extraData={this.state}
-              data={this.state.followers}
-              renderItem={({ item, index }) => this.displayData(item)}
-              keyExtractor={({ item}, index) => 'followers-list'+index}
-            />
-          </View>
-          
-          <View style={styles.profile_follow}>
-            <Text style={styles.follow_title}>Following ({this.state.followings.length})</Text>
-            <FlatList
-              extraData={this.state}
-              data={this.state.followings}
-              renderItem={({ item, index }) => this.displayData(item)}
-              keyExtractor={({ item}, index) => 'following-list'+index}
+              color={'#1F5673'}
+              onPress={() => this.logout()}
             />
           </View>
         </View>
+
+        <View style={styles.page_container}>
+
+          <View style={styles.page_content}>
+             <PhotoUpload 
+                  photoPickerTitle={'Select an image'}
+                  format={'PNG'}
+                  quality={70}
+                  onPhotoSelect={img_selected =>{
+                    if(img_selected){
+                      console.log('img selected', img_selected)
+                      this.uploadProfilePicture(img_selected.blob)
+                    }
+                  }}
+                >
+                  <Image 
+                      style={styles.image_profile} 
+                      //if a profile pic is set than use that one otherwise keep the default image  
+                      source={this.state.profile_pic ? {uri: this.state.profile_pic} : default_avatar}
+                    />
+                    {console.log('profile pic', this.state.profile_pic)}
+                </PhotoUpload>
+
+                <Text style={styles.user_details_font}>First Name: {this.state.user_details.given_name}</Text>
+                <Text style={styles.user_details_font}>Last Name: {this.state.user_details.family_name}</Text>
+                <Text style={styles.user_details_font}>Email: {this.state.user_details.email}</Text>        
+
+          </View>
+
+            <View style={styles.profile_follow}>
+              <Text style={styles.follow_title}>Followers ({this.state.followers.length})</Text>
+              <FlatList
+                extraData={this.state}
+                data={this.state.followers}
+                renderItem={({ item, index }) => this.displayData(item)}
+                keyExtractor={({ item}, index) => 'followers-list'+index}
+              />
+            </View>
+            
+            <View style={styles.profile_follow}>
+              <Text style={styles.follow_title}>Following ({this.state.followings.length})</Text>
+              <FlatList
+                extraData={this.state}
+                data={this.state.followings}
+                renderItem={({ item, index }) => this.displayData(item)}
+                keyExtractor={({ item}, index) => 'following-list'+index}
+              />
+            </View>
+          </View>
+        </View>
+
    
     )
   }
