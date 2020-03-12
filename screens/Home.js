@@ -13,6 +13,8 @@ class Home extends Component {
             isLoading: true,
             chitsList: [],
             uri:'',
+            chit_id:'',
+            chit_pic:[],
             isChitPicture: false
         }
     }
@@ -48,9 +50,29 @@ class Home extends Component {
                 chitsList: responseJson
             })        
         })
-        //.then(()=>this.getChitPicture())
+        .then(()=>this.getChitPicture())
         .catch((error) => {
             console.log(error)
+        })
+    }
+
+    //after retrieving the chits loop through all of them to extract the id and check if an image
+    //is associated to that chit
+    getChitPicture(){
+        this.state.chitsList.map((data) =>{
+            fetch('http://10.0.2.2:3333/api/v0.0.5/chits/'+data.chit_id+'/photo')
+            .then((response) =>{
+                if(response.status != 404){
+                    this.setState({
+                        uri: response.url,
+                        chit_id: data.chit_id,
+                        isChitPicture: true
+                    })
+                    const tempObj = {chit_id: this.state.chit_id, uri:this.state.uri}; 
+                    this.state.chit_pic.push(tempObj)
+                    console.log('list ' , this.state.chit_pic)
+                }
+            })
         })
     }
 
@@ -68,7 +90,10 @@ class Home extends Component {
                     {item.location ? 
                         (<Text style={styles.chit_location}>Your Location: {item.location.latitude}, {item.location.longitude}</Text>) 
                         : null}
-                    {this.state.isChitPicture ? (<Image source={{uri: this.state.uri}}/>) : null }
+                    {console.log('chit pic' , this.state.chit_pic.chit_id)}
+                    { this.state.isChitPicture ? 
+                        (<Image source={{uri: this.state.uri, width: 50, height: 50}} />) 
+                        : null }
                 </View>
             </View>
         )
@@ -82,8 +107,8 @@ class Home extends Component {
 
         if(this.state.isLoading){
             return(
-                <View style={{backgroundColor: '#B9B8D3', height:550, justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{fontSize: 42}}>Welcome to Chittr</Text>
+                <View style={styles.splash_screen}>
+                    <Image style={{width: 400, height: 196}} source={require('../assets/images/welcomeScreen.png')} />
                 </View>
             )
         }
