@@ -110,9 +110,6 @@ class NewChits extends Component {
         AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts))
     }
 
-    getDraft(){
-        
-    }
     componentDidMount(){
         AsyncStorage.getItem('token', (err, result) =>{
             this.setState({token: result})
@@ -124,7 +121,6 @@ class NewChits extends Component {
                 })
                 console.log('drafts from storage', this.state.chit_drafts)
             }
-            else{chit_drafts= ''}
         })  
     }
 
@@ -161,14 +157,16 @@ class NewChits extends Component {
                                 name={'content-save'} 
                                 size={32} 
                                 color={'#1F5673'} 
-                                onPress={async() => {
+                                onPress={() => {
                                     if(this.state.token !=null){
+                                        let tempList = this.state.chit_drafts;
+                                        tempList.push(this.state.chit_content)
                                         this.setState({
-                                            chit_drafts: this.state.chit_drafts.concat(this.state.chit_content),
+                                            chit_drafts: tempList,
                                             chit_content:''
                                         })
-                                        await AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
-                                        console.log('draft saved', this.state.chit_drafts)
+                                        AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
+                                        //console.log('draft saved', this.state.chit_drafts)
                                         Alert.alert('Draft saved')
                                     }
                                     else{this.displayAlertMessage()}
@@ -206,7 +204,6 @@ class NewChits extends Component {
                         <Text style={styles.draft_title}>DRAFTS</Text>
             
                         <FlatList
-                            extraData={this.state}
                             data={this.state.chit_drafts}
                             renderItem={({ item, index }) => this.displayDraft(item)}
                             keyExtractor={({ item}, index) => 'chits-list-'+index}
