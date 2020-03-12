@@ -32,10 +32,8 @@ class Profile extends Component {
     return fetch('http://10.0.2.2:3333/api/v0.0.5/logout')
       .then((response) => {
         Alert.alert("Logged out successfully ");
-        //clear the storage from user details and token
-        AsyncStorage.removeItem('token') 
-        AsyncStorage.removeItem('userId')
-        AsyncStorage.removeItem('user')
+        //clear the storage to avoid persistency of data after logout
+        AsyncStorage.clear()
       })
       .then((response) => this.props.navigation.navigate('Login'))
       .catch((error) => {
