@@ -1,6 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
+    splash_screen:{
+        backgroundColor: '#B9B8D3', 
+        height:550, 
+        justifyContent:'center', 
+        alignItems:'center'
+    },
+
     page_title:{
         fontSize: 32,
         fontWeight:'bold',
@@ -50,5 +57,9 @@ export default styles = StyleSheet.create({
         borderTopColor: 'gray',
         borderTopWidth: 1,
         paddingTop: 4
+    },
+
+    image:{
+        width: 50,
     }
 })
