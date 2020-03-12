@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Alert, FlatList } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { YellowBox } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import Geolocation from '@react-native-community/geolocation';
 import CustomIcon from '../app_components/customizedIconButton';
+
+//as the number of draft will be minimum the warning had been suppressed allowing the use the ScrollView
+//to facilitate the movement towards the new content
+YellowBox.ignoreWarnings([
+  'VirtualizedLists should never be nested',
+])
 
 import styles from '../styles/new_chit_style'
 
@@ -22,7 +30,7 @@ class NewChits extends Component {
     static navigationOptions= {
         title: 'New Chit',
         headerTitleStyle: styles.page_title,
-        headerStyle: {height: 64, marginBottom: 12}
+        headerStyle: {height: 64}
     }
 
     postChits(){
@@ -60,8 +68,10 @@ class NewChits extends Component {
     displayDraft(item) {
         return (
             <View style={styles.draft_container}>
-                <Text>Your position: {this.state.latitude}, {this.state.longitude}</Text>
+                <Text>Your position: {this.state.latitude} - {this.state.longitude}</Text>
+                
                 <Text style={styles.chit_draft}>{item}</Text>
+                
                 <View style={{flexDirection:'row', flex:1}}>
                     <CustomIcon 
                         name={'file-document-edit-outline'} 
@@ -109,10 +119,7 @@ class NewChits extends Component {
         })
         AsyncStorage.getItem('chits', (err, chit_r)=>{
             if(chit_r != null){
-                //let chits = JSON.parse(chit_r)
-                //console.log('chits from storage', chits)
                 this.setState({
-                    //chit_drafts: this.state.chit_drafts.concat(chits)
                     chit_drafts: JSON.parse(chit_r)
                 })
                 console.log('drafts from storage', this.state.chit_drafts)
@@ -123,90 +130,90 @@ class NewChits extends Component {
 
     render() {
         return (
-            <View style={styles.new_chit_page}> 
-                <FlatList
-                    extraData={this.state}
-                    data={this.state.chit_drafts}
-                    renderItem={({ item, index }) => this.displayDraft(item)}
-                    keyExtractor={({ item}, index) => 'chits-list-'+index}
-                    //in order to allow scrollable feature for the drafts and prevent warning from the use
-                    //of ScrollView with FlatList nested inside all the components above the draft
-                    //are rendered as list header components
-                    ListHeaderComponent={(
-                        <View>
-                            <TextInput 
-                                style={styles.input_chit}
-                                value={this.state.chit_content}
-                                multiline={true}
-                                maxLength={141} //prevent users to write more than 141 chars
-                                onChangeText={(chit_content) => this.setState({ chit_content })}/>
-                            <Text>Your position: {this.state.latitude} {this.state.longitude}</Text>
-                            {/*display while typing how many char had been used*/}
-                            <Text>Characters available: {141-this.state.chit_content.length}</Text> 
-                            
-                            <View style={styles.new_chits_buttons_layout}>
-                                <CustomIcon 
-                                    name={'send'} 
-                                    size={32} 
-                                    color={'#1F5673'} 
-                                    onPress={() => {
-                                        if(this.state.token !=null){
-                                            this.postChits();
-                                        }
-                                        else{ this.displayAlertMessage() }
-                                    }} />
+            <ScrollView>
+                <View style={styles.new_chit_page}> 
 
-                                <CustomIcon 
-                                    name={'content-save'} 
-                                    size={32} 
-                                    color={'#1F5673'} 
-                                    onPress={async() => {
-                                        if(this.state.token !=null){
-                                            this.setState({
-                                                chit_drafts: this.state.chit_drafts.concat(this.state.chit_content),
-                                                chit_content:''
-                                            })
-                                            await AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
-                                            console.log('draft saved', this.state.chit_drafts)
-                                            Alert.alert('Draft saved')
-                                        }
-                                        else{this.displayAlertMessage()}
-                                    }} />
-
-                                <CustomIcon 
-                                    name={'image-outline'} 
-                                    size={32} 
-                                    color={'#1F5673'} 
-                                    onPress={() => {
-                                        if(this.state.token !=null){
-                                            this.props.navigation.navigate('Camera')
-                                        }
-                                        else{this.displayAlertMessage()}
-                                    }} />
+                    <View style={styles.page_container}>
+                        <TextInput 
+                            style={styles.input_chit}
+                            value={this.state.chit_content}
+                            multiline={true}
+                            maxLength={141} //prevent users to write more than 141 chars
+                            onChangeText={(chit_content) => this.setState({ chit_content })}
+                        />
+                        <Text>Your position: {this.state.latitude} - {this.state.longitude}</Text>
+                        {/*display while typing how many char had been used*/}
+                        <Text>Characters available: {141-this.state.chit_content.length}</Text> 
                                 
-                                <CustomIcon 
-                                    name={'map-marker-outline'} 
-                                    size={32} 
-                                    color={'#1F5673'} 
-                                    onPress={() => {
-                                        if(this.state.token !=null){
-                                            Geolocation.getCurrentPosition(location => {
-                                                this.setState({
-                                                    latitude: location.coords.latitude,
-                                                    longitude: location.coords.longitude
-                                                })
-                                            });
-                                            Alert.alert('Geolocation','Your location had been added to your chit')
-                                        }
-                                        else{this.displayAlertMessage()}
-                                    }} />
-                            </View>
-                                <Text style={styles.draft_title}>DRAFTS</Text>
+                        <View style={styles.new_chits_buttons_layout}>
+                            <CustomIcon 
+                                name={'send'} 
+                                size={32} 
+                                color={'#1F5673'} 
+                                onPress={() => {
+                                    if(this.state.token !=null){
+                                        this.postChits();
+                                    }
+                                    else{ this.displayAlertMessage() }
+                                }} />
+
+                            <CustomIcon 
+                                name={'content-save'} 
+                                size={32} 
+                                color={'#1F5673'} 
+                                onPress={async() => {
+                                    if(this.state.token !=null){
+                                        this.setState({
+                                            chit_drafts: this.state.chit_drafts.concat(this.state.chit_content),
+                                            chit_content:''
+                                        })
+                                        await AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
+                                        console.log('draft saved', this.state.chit_drafts)
+                                        Alert.alert('Draft saved')
+                                    }
+                                    else{this.displayAlertMessage()}
+                                }} />
+
+                            <CustomIcon 
+                                name={'image-outline'} 
+                                size={32} 
+                                color={'#1F5673'} 
+                                onPress={() => {
+                                    if(this.state.token !=null){
+                                        this.props.navigation.navigate('Camera')
+                                    }
+                                    else{this.displayAlertMessage()}
+                                }} />
+                            
+                            <CustomIcon 
+                                name={'map-marker-outline'} 
+                                size={32} 
+                                color={'#1F5673'} 
+                                onPress={() => {
+                                    if(this.state.token !=null){
+                                        Geolocation.getCurrentPosition(location => {
+                                            this.setState({
+                                                latitude: location.coords.latitude,
+                                                longitude: location.coords.longitude
+                                            })
+                                        });
+                                        Alert.alert('Geolocation','Your location had been added to your chit')
+                                    }
+                                    else{this.displayAlertMessage()}
+                                }} />
                         </View>
-                    )}
-                />
-                
-            </View>
+                        
+                        <Text style={styles.draft_title}>DRAFTS</Text>
+            
+                        <FlatList
+                            extraData={this.state}
+                            data={this.state.chit_drafts}
+                            renderItem={({ item, index }) => this.displayDraft(item)}
+                            keyExtractor={({ item}, index) => 'chits-list-'+index}
+                        />
+                    </View>
+                </View>
+            </ScrollView>
         )
     }
 }

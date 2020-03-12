@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Alert, TouchableOpacity } from 'react-native';
 import CustomFormInput from '../app_components/inputField'
 
-import styles from '../styles/profile_style'
+import styles from '../styles/form_style'
 import AsyncStorage from '@react-native-community/async-storage';
 
 class UpdateProfile extends Component{
@@ -73,9 +73,11 @@ class UpdateProfile extends Component{
 
   render(){
     return(
-      <View style={{backgroundColor: '#B9B8D3'}}>
+      <View style={styles.page}>
 
         <View style={styles.page_container}>
+          <View style={styles.page_content}>
+
             <CustomFormInput 
                 labelTitle={'First Name:'}
                 value={this.state.given_name}
@@ -109,6 +111,7 @@ class UpdateProfile extends Component{
               onPress={()=> this.updateProfile()}>
                   <Text>UPDATE DETAILS</Text>
             </TouchableOpacity>
+          </View>
 
           </View>
       </View>

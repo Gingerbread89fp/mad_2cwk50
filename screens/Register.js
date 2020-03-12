@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Alert, TouchableOpacity } from 'react-native';
 import CustomFormInput from '../app_components/inputField'
 
-import styles from '../styles/app_style'
+import styles from '../styles/form_style'
 
 class Register extends Component{
   constructor(props){
@@ -17,8 +17,8 @@ class Register extends Component{
 
   static navigationOptions={
     title: 'Registration page',
-    headerTitleStyle: styles.page_title,
-    headerStyle: {height: 64, marginBottom: 12},
+    headerTitleStyle: styles.title,
+    headerStyle: {height: 64},
   }
 
   register(){
@@ -43,38 +43,44 @@ class Register extends Component{
 
   render(){
     return(
-      <View style={styles.details_form}>
+      <View style={styles.page}>
 
-        <CustomFormInput 
-            labelTitle={'First Name:'}
-            value={this.state.given_name}
-            onChangeText={(given_name) => this.setState({given_name})}
-        />
+        <View style={styles.page_container}>
+          <View style={styles.page_content}>
 
-        <CustomFormInput 
-            labelTitle={'Last Name:'}
-            value={this.state.family_name}
-            onChangeText={(family_name)=>this.setState({family_name})}
-        />
+            <CustomFormInput 
+                labelTitle={'First Name:'}
+                value={this.state.given_name}
+                onChangeText={(given_name) => this.setState({given_name})}
+            />
 
-        <CustomFormInput 
-            labelTitle={'Email:'}
-            value={this.state.email}
-            onChangeText={(email)=>this.setState({email})}
-        />
+            <CustomFormInput 
+                labelTitle={'Last Name:'}
+                value={this.state.family_name}
+                onChangeText={(family_name)=>this.setState({family_name})}
+            />
 
-        <CustomFormInput 
-            labelTitle={'Password:'}
-            value={this.state.password}
-            onChangeText={(password)=>this.setState({password})}
-        />
-        
-        <TouchableOpacity
-          style={styles.button_style} 
-          onPress={()=> this.register()}>
-              <Text>SIGNUP</Text>
-        </TouchableOpacity>
+            <CustomFormInput 
+                labelTitle={'Email:'}
+                value={this.state.email}
+                onChangeText={(email)=>this.setState({email})}
+            />
 
+            <CustomFormInput 
+                labelTitle={'Password:'}
+                value={this.state.password}
+                onChangeText={(password)=>this.setState({password})}
+                secureTextEntry={true}
+            />
+            
+            <TouchableOpacity
+              style={styles.button_style} 
+              onPress={()=> this.register()}>
+                  <Text>SIGNUP</Text>
+            </TouchableOpacity>
+          </View>
+
+          </View>
       </View>
     )
 

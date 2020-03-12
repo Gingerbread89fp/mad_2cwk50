@@ -62,30 +62,32 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', backgroundColor: '' }}>
+      <View style={styles.page_container}>
+       
+        <View style={styles.page_content}>
+          
+          <Image style={styles.image}></Image>
+          <Text style={styles.label}>Email:</Text>
+          <TextInput
+            style={styles.login_input}
+            value={this.state.email}
+            onChangeText={(email) => this.setState({ email })} />
 
-        <Image style={styles.image}></Image>
+          <Text style={styles.label}>Password:</Text>
+          <TextInput
+            style={styles.login_input}
+            value={this.state.password}
+            onChangeText={(password) => this.setState({ password })}
+            secureTextEntry={true} />
 
-        <Text style={styles.label}>Email:</Text>
-        <TextInput
-          style={styles.login_input}
-          value={this.state.email}
-          onChangeText={(email) => this.setState({ email })} />
+          <TouchableOpacity
+            style={styles.button_style}
+            onPress={() => this.login()}>
+            <Text>LOGIN</Text>
+          </TouchableOpacity>
 
-        <Text style={styles.label}>Password:</Text>
-        <TextInput
-          style={styles.login_input}
-          value={this.state.password}
-          onChangeText={(password) => this.setState({ password })}
-          secureTextEntry={true} />
-
-        <TouchableOpacity
-          style={styles.button_style}
-          onPress={() => this.login()}>
-          <Text>LOGIN</Text>
-        </TouchableOpacity>
-
-        <Text onPress={() => this.props.navigation.navigate('Register')} >Register now</Text>
+          <Text onPress={() => this.props.navigation.navigate('Register')} >Register now</Text>
+        </View>
 
       </View>
     )

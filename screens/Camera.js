@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -24,7 +24,6 @@ class Camera extends Component {
         if (this.camera) {
             const settings = { quality: 0.5, base64: true, pauseAfterCapture: false };
             const picture = await this.camera.takePictureAsync(settings);
-            console.log(picture.uri);
 
             return fetch('http://10.0.2.2:3333/api/v0.0.5/chits/'+this.state.chit_id+'/photo', {
                 method: 'POST',
@@ -51,7 +50,6 @@ class Camera extends Component {
         .then((responseJson) =>{
             var lastChit = responseJson.length
             this.setState({chit_id: lastChit})
-            console.log('**** id ', this.state.chit_id)
         })
     }
 

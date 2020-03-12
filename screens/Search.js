@@ -13,7 +13,6 @@ class Search extends Component{
             input_text: '',
             token:'',
             userList: [],
-            isFollowed: false
         }
     }
 
@@ -24,7 +23,6 @@ class Search extends Component{
             this.setState({
                 userList: responseJson
             });
-            console.log("****DEBUG ", this.state.userList)
         })
         .catch((error) => {
           console.log(error)
@@ -39,17 +37,17 @@ class Search extends Component{
     }
 
     displayData(item){
-        const isFollowed = this.state.isFollowed
         return(
-            <View style={styles.page_content}>
+            <View style={styles.user_list}>
                 
                 <Text style={styles.name_label}>{item.given_name} {item.family_name}</Text>
                 
-                    <CustomIcon 
+                <CustomIcon 
                     name={'account-plus'} 
                     size={36} 
                     color={'#1F5673'} 
-                    onPress={() => this.followUser(item.user_id)} />
+                    onPress={() => this.followUser(item.user_id)} 
+                />
             </View>
         )
     }
@@ -107,7 +105,7 @@ class Search extends Component{
 
                         <CustomIcon 
                             name={'magnify'} 
-                            size={36} 
+                            size={46} 
                             color={'#1F5673'} 
                             onPress={() => this.searchUsers()}/>
                     </View>

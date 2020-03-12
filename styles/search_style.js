@@ -29,8 +29,14 @@ export default styles = StyleSheet.create({
         height: 600,
         elevation: 4
     },
-    page_content: {
-        alignContent:'space-around',
+
+    page_content:{
+        flexDirection:'row',
+        justifyContent:'center',
+        marginVertical:8
+    },
+
+    user_list: {
         alignItems:'center',
         flexDirection:'row',
         marginVertical:8,
@@ -38,13 +44,14 @@ export default styles = StyleSheet.create({
     },
 
     input:{
-        borderColor: 'gray',
+        borderColor: '#90C3C8',
         borderStyle: 'solid',
-        borderWidth: 1,
-        padding: 2,
+        borderWidth: 4,
+        paddingLeft: 10,
         width: 300,
-        marginBottom: 20,
-        flex:1
+        height: 48,
+        borderRadius: 8,
+        marginBottom: 20
     },
 
     name_label: {
