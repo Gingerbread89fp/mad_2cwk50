@@ -66,7 +66,7 @@ class Login extends Component {
        
         <View style={styles.page_content}>
           
-          <Image style={styles.image}></Image>
+          <Image style={styles.image} source={require('../assets/images/appLogo.png')}/>
           <Text style={styles.label}>Email:</Text>
           <TextInput
             style={styles.login_input}
