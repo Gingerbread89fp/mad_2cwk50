@@ -2,7 +2,7 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import CustomIcon from './app_components/customizedIconButton';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 import Login from './screens/Login';
 import Register from './screens/Register';
@@ -18,7 +18,7 @@ const AppNavigator = createBottomTabNavigator({
   Search:{
     screen: Search,
     navigationOptions:{
-      //tabBarIcon:()=>(<CustomIcon name='magnify' size={32} color='#1F5673' onPress={() => this.props.navigation.navigate('Search')}/>)
+      tabBarIcon:({tintColor})=>(<Octicons name='search' size={30} color={tintColor} />)
     }
   },
   Home: {
@@ -31,7 +31,7 @@ const AppNavigator = createBottomTabNavigator({
       Register
     }),
     navigationOptions:{
-      //tabBarIcon:()=>(<CustomIcon name='home-circle' size={32} color='#1F5673' />) 
+      tabBarIcon:({tintColor})=>(<Octicons name='home' size={30} color={tintColor} />) 
     }
   },
   Profile:{
@@ -40,7 +40,7 @@ const AppNavigator = createBottomTabNavigator({
       UpdateProfile
     }),
     navigationOptions:{
-      //tabBarIcon:()=>(<CustomIcon name='account-circle-outline' size={32} color='#1F5673' />) 
+      tabBarIcon:({tintColor})=>(<Octicons name='person' size={30} color={tintColor} />) 
     }
   }
 }, 
@@ -48,10 +48,7 @@ const AppNavigator = createBottomTabNavigator({
   initialRouteName: 'Home',
   tabBarOptions: {
     activeTintColor: '#1F5673',
-    inactiveTintColor: '#B9B8D3',
-    labelStyle: {
-      fontSize: 12,
-    },
+    inactiveTintColor: '#B9B8D3'
 }
   
 });
