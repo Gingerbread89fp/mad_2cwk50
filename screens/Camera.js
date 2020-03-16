@@ -10,7 +10,7 @@ class Camera extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            chit_id: 0,
+            chit_id: ''
         }
     }
 
@@ -33,7 +33,7 @@ class Camera extends Component {
                 },
                 body: picture
             })
-            .then((reposnse) => Alert.alert('Image added to your chit successfully'))
+            .then((reposnse) => Alert.alert('Uploaded','Image added to your chit successfully'))
             .then((response) => this.props.navigation.navigate('Home'))
             .catch((error) => {
                 console.log(error)
@@ -45,11 +45,8 @@ class Camera extends Component {
         AsyncStorage.getItem('token', (err, result) =>{
             this.setState({token: result})
         })
-        return fetch('http://10.0.2.2:3333/api/v0.0.5/chits')
-        .then((response) => response.json())
-        .then((responseJson) =>{
-            var lastChit = responseJson.length
-            this.setState({chit_id: lastChit})
+        AsyncStorage.getItem('chitId', (err, result) =>{
+            this.setState({chit_id: result})
         })
     }
 
