@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FlatList, Text, View, Image } from 'react-native'; 
-
 import CustomIcon from '../app_components/customizedIconButton';
 
 import styles from '../styles/home_style'
@@ -12,10 +11,7 @@ class Home extends Component {
         this.state = {
             isLoading: true,
             chitsList: [],
-            uri:'',
-            chit_id:'',
-            chit_pic:[],
-            isChitPicture: false
+            uri:''
         }
     }
 
@@ -60,40 +56,35 @@ class Home extends Component {
     //is associated to that chit
     getChitPicture(){
         this.state.chitsList.map((data) =>{
-            fetch('http://10.0.2.2:3333/api/v0.0.5/chits/'+data.chit_id+'/photo')
+            return fetch('http://10.0.2.2:3333/api/v0.0.5/chits/'+data.chit_id+'/photo')
             .then((response) =>{
                 if(response.status != 404){
                     this.setState({
-                        uri: response.url,
-                        chit_id: data.chit_id,
-                        isChitPicture: true
+                        uri: response.url
                     })
-                    const tempObj = {chit_id: this.state.chit_id, uri:this.state.uri}; 
-                    this.state.chit_pic.push(tempObj)
-                    console.log('list ' , this.state.chit_pic)
-                }
+                    data.url = this.state.uri   
+                }              
             })
         })
     }
 
     displayChitsList(item) {
+        console.log('**** chit list ****', this.state.chitsList)
         return (
             <View style={styles.chit_container} key={item.chit_id}>
                 <CustomIcon
                     name={'account-circle-outline'}
                     size={40}
                     color={'#1F5673'}
-                />
+                    />
                 <View style={styles.chit_content}>
                     <Text style={styles.name_label}>{item.user.given_name}</Text>
                     <Text style={styles.chit_text}>{item.chit_content}</Text>
+                    
+                    <Image source={{uri: item.url, width: 100, height: 100}} />
                     {item.location ? 
                         (<Text style={styles.chit_location}>Your Location: {item.location.latitude}, {item.location.longitude}</Text>) 
                         : null}
-                    {console.log('chit pic' , this.state.chit_pic.chit_id)}
-                    { this.state.isChitPicture ? 
-                        (<Image source={{uri: this.state.uri, width: 50, height: 50}} />) 
-                        : null }
                 </View>
             </View>
         )
@@ -103,8 +94,13 @@ class Home extends Component {
         this.getChits();
     }
 
-    render() {
+    /* componentDidUpdate(prevState){
+        if(this.state.chitsList != prevState.chitsList){
+            this.getChits();
+        }
+    } */
 
+    render() {
         if(this.state.isLoading){
             return(
                 <View style={styles.splash_screen}>
