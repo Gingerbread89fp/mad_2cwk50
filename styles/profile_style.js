@@ -53,9 +53,9 @@ export default styles = StyleSheet.create({
     image_profile:{
         width: 156,
         height: 156, 
-        borderRadius: 32, 
-        borderWidth: 1,
-        borderColor: '#B9B8D3',
+        borderRadius: 78, 
+        borderWidth: 2,
+        borderColor: '#1F5673',
         marginBottom: 12
     },
 

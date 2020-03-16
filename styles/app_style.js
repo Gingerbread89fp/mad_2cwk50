@@ -37,9 +37,9 @@ export default styles = StyleSheet.create({
     },
 
     image:{
-        width: 220, 
-        height: 220, 
-        borderRadius: 110, 
+        width: 210, 
+        height: 210, 
+        borderRadius: 105, 
         borderWidth: 1,
         borderColor: '#1F5673',
         marginBottom: 20

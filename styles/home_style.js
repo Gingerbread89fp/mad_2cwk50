@@ -41,14 +41,15 @@ export default styles = StyleSheet.create({
         padding: 10,
         marginTop: 8,
         marginHorizontal: 12,
-        elevation:4
+        elevation:4 
     },
     chit_content:{
         flexDirection:'column', 
         width: 320
     },
     chit_text:{
-        flexWrap:'wrap' 
+        flexWrap:'wrap',
+        marginBottom: 8 
     },
     chit_location:{
         fontSize:12,
