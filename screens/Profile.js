@@ -70,9 +70,11 @@ class Profile extends Component {
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.user_id+'/photo')
     .then((response) =>{
       console.log('pic', response)
-      this.setState({
-        profile_pic: response.url
-      })
+      if(!response.status === 404 || !response.status === 500){
+        this.setState({
+          profile_pic: response.url
+        })
+      }
     })
   }
 
@@ -135,16 +137,22 @@ class Profile extends Component {
   }
 
   uploadProfilePicture(img_selected){
+    const picData = new FormData();
+    picData.append('picture', {
+      uri: img_selected,
+      type: 'image/jpeg'
+    })
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user/photo', {
       method: 'POST',
       headers: { 
-          "Content-Type": "image/png", 
+          "Content-Type": "image/jpeg", 
           "X-Authorization": JSON.parse(this.state.token)
       },
-      body: img_selected
+      body: picData
     })
     .then((response) => {
-        Alert.alert("Picture changed successfully")  
+        Alert.alert("Picture changed successfully") 
+        console.log(response) 
     })
     .catch((error)=>{
       console.log(error)
@@ -185,7 +193,7 @@ class Profile extends Component {
           <View style={styles.page_content}>
              <PhotoUpload 
                   photoPickerTitle={'Select an image'}
-                  format={'PNG'}
+                  format={'JPEG'}
                   quality={70}
                   onPhotoSelect={img_selected =>{
                     if(img_selected){
