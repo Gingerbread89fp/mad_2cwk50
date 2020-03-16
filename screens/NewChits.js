@@ -50,6 +50,11 @@ class NewChits extends Component {
             })
             
         })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            AsyncStorage.setItem('chitId', JSON.stringify(responseJson.chit_id));
+            console.log('chitID ', responseJson.chit_id)
+        })
         .then((response) => this.props.navigation.navigate('Home'))
         .catch((error) => {
             console.log(error)
@@ -88,8 +93,10 @@ class NewChits extends Component {
                         size={28} 
                         color={'#1F5673'} 
                         onPress={()=> {
-                            this.setState({chit_content: item})
                             //text will be displayed back into the input text and can be sent from there
+                            //draft will be deleted once requested to be posted
+                            this.setState({chit_content: item})
+                            this.deleteDraft(item)
                         }}/>
                     <CustomIcon 
                         name={'timetable'} 
@@ -122,6 +129,19 @@ class NewChits extends Component {
                 console.log('drafts from storage', this.state.chit_drafts)
             }
         })  
+    }
+
+    componentDidUpdate(prevState){
+        if(this.state.chit_drafts != prevState.chit_draft){
+            AsyncStorage.getItem('chits', (err, chit_r)=>{
+                if(chit_r != null){
+                    this.setState({
+                        chit_drafts: JSON.parse(chit_r)
+                    })
+                    console.log('drafts from storage', this.state.chit_drafts)
+                }
+            })  
+        }
     }
 
     render() {
