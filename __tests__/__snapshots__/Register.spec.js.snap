@@ -1,0 +1,200 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Register /> render Register page correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#B9B8D3",
+      "height": 560,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignContent": "space-between",
+        "backgroundColor": "white",
+        "borderColor": "#1F5673",
+        "borderRadius": 8,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "elevation": 4,
+        "height": 500,
+        "marginHorizontal": 12,
+        "marginVertical": 8,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "paddingTop": 18,
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+           
+          First Name:
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "borderColor": "#90C3C8",
+              "borderRadius": 8,
+              "borderStyle": "solid",
+              "borderWidth": 4,
+              "height": 48,
+              "marginBottom": 20,
+              "paddingLeft": 10,
+              "width": 360,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+           
+          Last Name:
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "borderColor": "#90C3C8",
+              "borderRadius": 8,
+              "borderStyle": "solid",
+              "borderWidth": 4,
+              "height": 48,
+              "marginBottom": 20,
+              "paddingLeft": 10,
+              "width": 360,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+           
+          Email:
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "borderColor": "#90C3C8",
+              "borderRadius": 8,
+              "borderStyle": "solid",
+              "borderWidth": 4,
+              "height": 48,
+              "marginBottom": 20,
+              "paddingLeft": 10,
+              "width": 360,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+           
+          Password:
+        </Text>
+        <TextInput
+          allowFontScaling={true}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          secureTextEntry={true}
+          style={
+            Object {
+              "borderColor": "#90C3C8",
+              "borderRadius": 8,
+              "borderStyle": "solid",
+              "borderWidth": 4,
+              "height": 48,
+              "marginBottom": 20,
+              "paddingLeft": 10,
+              "width": 360,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#90C3C8",
+            "borderColor": "#1F5673",
+            "borderRadius": 8,
+            "borderWidth": 2,
+            "height": 40,
+            "justifyContent": "center",
+            "marginTop": 18,
+            "opacity": 1,
+            "textDecorationColor": "black",
+            "width": 164,
+          }
+        }
+      >
+        <Text>
+          SIGNUP
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
