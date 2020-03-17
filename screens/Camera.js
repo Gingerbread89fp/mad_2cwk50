@@ -63,6 +63,7 @@ class Camera extends Component {
                         name={'camera-outline'}
                         size={60}
                         color={'white'}
+                        accessibilityLabel={'Take a picture'}
                         onPress={this.takePicture.bind(this)}
                     />
                 </View>

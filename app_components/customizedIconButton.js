@@ -14,7 +14,11 @@ export default class CustomIcon extends Component{
     render(){
       return(
         <View style={styles.custom_icon_layout}>
-          <TouchableOpacity onPress={this.props.onPress}>
+          <TouchableOpacity 
+            onPress={this.props.onPress} 
+            accessible={true} 
+            accessibilityLabel={this.props.accessibilityLabel}
+          >
             <MaterialCommunityIcons 
               name={this.props.name} 
               size={this.props.size} 
@@ -30,5 +34,6 @@ CustomIcon.propTypes = {
   name: PropTypes.string.isRequired, 
   size: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
+  accessibilityLabel: PropTypes.string,
   onPress: PropTypes.func
 }

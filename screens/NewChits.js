@@ -82,16 +82,19 @@ class NewChits extends Component {
                         name={'file-document-edit-outline'} 
                         size={28} 
                         color={'#1F5673'} 
+                        accessibilityLabel='edit draft'
                         onPress={()=> this.props.navigation.navigate('EditDraft', {editDraft: item})}/>
                     <CustomIcon 
                         name={'delete-outline'} 
                         size={28} 
                         color={'#1F5673'} 
+                        accessibilityLabel='delete draft'
                         onPress={()=> this.deleteDraft(item)}/>
                     <CustomIcon 
                         name={'send'} 
                         size={28} 
                         color={'#1F5673'} 
+                        accessibilityLabel='post draft'
                         onPress={()=> {
                             //text will be displayed back into the input text and can be sent from there
                             //draft will be deleted once requested to be posted
@@ -102,6 +105,7 @@ class NewChits extends Component {
                         name={'timetable'} 
                         size={28} 
                         color={'#1F5673'} 
+                        accessibilityLabel='schedule draft'
                         onPress={()=> this.deleteDraft}/>
                 </View>
                 
@@ -115,6 +119,28 @@ class NewChits extends Component {
         list.splice(position, 1)
         this.setState({chit_drafts: list})
         AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts))
+    }
+
+    saveDraft(){
+        let tempList = this.state.chit_drafts;
+        tempList.push(this.state.chit_content)
+        this.setState({
+            chit_drafts: tempList,
+            chit_content:''
+        })
+        AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
+        //console.log('draft saved', this.state.chit_drafts)
+        Alert.alert('Draft saved')
+    }
+
+    addLocation(){
+        Geolocation.getCurrentPosition(location => {
+            this.setState({
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude
+            })
+        });
+        Alert.alert('Geolocation','Your location had been added to your chit')
     }
 
     componentDidMount(){
@@ -147,7 +173,7 @@ class NewChits extends Component {
     render() {
         return (
             <ScrollView>
-                <View style={styles.new_chit_page}> 
+                <View style={styles.new_chit_page} accessible={true}> 
 
                     <View style={styles.page_container}>
                         <TextInput 
@@ -166,6 +192,7 @@ class NewChits extends Component {
                                 name={'send'} 
                                 size={32} 
                                 color={'#1F5673'} 
+                                accessibilityLabel='post chit'
                                 onPress={() => {
                                     if(this.state.token !=null){
                                         this.postChits();
@@ -177,17 +204,10 @@ class NewChits extends Component {
                                 name={'content-save'} 
                                 size={32} 
                                 color={'#1F5673'} 
+                                accessibilityLabel='save chit in drafts'
                                 onPress={() => {
                                     if(this.state.token !=null){
-                                        let tempList = this.state.chit_drafts;
-                                        tempList.push(this.state.chit_content)
-                                        this.setState({
-                                            chit_drafts: tempList,
-                                            chit_content:''
-                                        })
-                                        AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
-                                        //console.log('draft saved', this.state.chit_drafts)
-                                        Alert.alert('Draft saved')
+                                        this.saveDraft();
                                     }
                                     else{this.displayAlertMessage()}
                                 }} />
@@ -196,6 +216,7 @@ class NewChits extends Component {
                                 name={'image-outline'} 
                                 size={32} 
                                 color={'#1F5673'} 
+                                accessibilityLabel='add image to last chit'
                                 onPress={() => {
                                     if(this.state.token !=null){
                                         this.props.navigation.navigate('Camera')
@@ -207,15 +228,10 @@ class NewChits extends Component {
                                 name={'map-marker-outline'} 
                                 size={32} 
                                 color={'#1F5673'} 
+                                accessibilityLabel='add location to your chit'
                                 onPress={() => {
                                     if(this.state.token !=null){
-                                        Geolocation.getCurrentPosition(location => {
-                                            this.setState({
-                                                latitude: location.coords.latitude,
-                                                longitude: location.coords.longitude
-                                            })
-                                        });
-                                        Alert.alert('Geolocation','Your location had been added to your chit')
+                                        this.addLocation()
                                     }
                                     else{this.displayAlertMessage()}
                                 }} />

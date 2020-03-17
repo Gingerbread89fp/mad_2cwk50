@@ -94,12 +94,6 @@ class Home extends Component {
         this.getChits();
     }
 
-    /* componentDidUpdate(prevState){
-        if(this.state.chitsList != prevState.chitsList){
-            this.getChits();
-        }
-    } */
-
     render() {
         if(this.state.isLoading){
             return(
@@ -111,7 +105,7 @@ class Home extends Component {
 
 
         return (
-            <View style={{backgroundColor: '#B9B8D3'}}>       
+            <View style={{backgroundColor: '#B9B8D3'}} accessible={true}>       
                 <FlatList
                     data={this.state.chitsList}
                     renderItem={({ item, index }) => this.displayChitsList(item, index)}

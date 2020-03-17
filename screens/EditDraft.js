@@ -57,6 +57,8 @@ class NewChits extends Component {
                     <View style={styles.new_chits_buttons_layout}>
                         <TouchableOpacity
                             style={styles.new_chits_buttons}
+                            accessible={true}
+                            accessibilityLabel='Take a picture'
                             onPress={() => {
                                 const updatedChit = this.state.chit_content
                                 const tempList = this.state.chit_drafts

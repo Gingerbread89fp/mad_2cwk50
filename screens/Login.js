@@ -82,6 +82,8 @@ class Login extends Component {
 
           <TouchableOpacity
             style={styles.button_style}
+            accessible={true}
+            accessibilityLabel='Click to login'
             onPress={() => this.login()}>
             <Text>LOGIN</Text>
           </TouchableOpacity>

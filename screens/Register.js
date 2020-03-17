@@ -43,7 +43,7 @@ class Register extends Component{
 
   render(){
     return(
-      <View style={styles.page}>
+      <View style={styles.page} accessible={true}>
 
         <View style={styles.page_container}>
           <View style={styles.page_content}>
@@ -75,6 +75,7 @@ class Register extends Component{
             
             <TouchableOpacity
               style={styles.button_style} 
+              accessibilityLabel='click to register'
               onPress={()=> this.register()}>
                   <Text>SIGNUP</Text>
             </TouchableOpacity>

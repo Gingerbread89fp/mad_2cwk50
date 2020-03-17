@@ -46,6 +46,7 @@ class Search extends Component{
                     name={'account-plus'} 
                     size={36} 
                     color={'#1F5673'} 
+                    accessibilityLabel='add user to following list'
                     onPress={() => this.followUser(item.user_id)} 
                 />
             </View>
@@ -88,7 +89,7 @@ class Search extends Component{
 
     render(){
         return(
-            <View style={{backgroundColor: '#B9B8D3'}}>
+            <View style={{backgroundColor: '#B9B8D3'}} accessible={true}>
                 
                 <View style={styles.header}>
                     <Text style={styles.page_title}>Search</Text>
@@ -107,6 +108,7 @@ class Search extends Component{
                             name={'magnify'} 
                             size={46} 
                             color={'#1F5673'} 
+                            accessibilityLabel='click to search'
                             onPress={() => this.searchUsers()}/>
                     </View>
                     

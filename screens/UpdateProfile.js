@@ -73,7 +73,7 @@ class UpdateProfile extends Component{
 
   render(){
     return(
-      <View style={styles.page}>
+      <View style={styles.page} accessible={true}>
 
         <View style={styles.page_container}>
           <View style={styles.page_content}>
@@ -108,6 +108,7 @@ class UpdateProfile extends Component{
             
             <TouchableOpacity
               style={styles.button_style} 
+              accessibilityLabel='click to update your details'
               onPress={()=> this.updateProfile()}>
                   <Text>UPDATE DETAILS</Text>
             </TouchableOpacity>

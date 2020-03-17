@@ -112,6 +112,7 @@ class Profile extends Component {
               name={'account-minus'} 
               size={28} 
               color={'#1F5673'} 
+              accessibilityLabel='remove user from followers/following list'
               onPress={() => this.unFollowUser(item.user_id)}/>
         </View>
     )
@@ -125,7 +126,7 @@ class Profile extends Component {
             "X-Authorization": JSON.parse(this.state.token)
         }})
       .then((response) => {
-          Alert.alert("user unfollowed successfully ")  
+          Alert.alert('Successful Action', 'user unfollowed successfully')  
       })
       .then(()=>{
         this.getFollowers();
@@ -151,7 +152,7 @@ class Profile extends Component {
       body: picData
     })
     .then((response) => {
-        Alert.alert("Picture changed successfully") 
+        Alert.alert('Successful Action', 'Picture uploeaded correctly') 
         console.log(response) 
     })
     .catch((error)=>{
@@ -168,7 +169,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: '#B9B8D3'}}>
+      <View style={{backgroundColor: '#B9B8D3'}} accessible={true}>
         
         <View style={styles.header}>
           <Text style={styles.title}>Profile</Text>
@@ -177,12 +178,14 @@ class Profile extends Component {
                 name={'account-edit'}
                 size={40}
                 color={'#1F5673'}
+                accessibilityLabel='edit profile'
                 onPress={() => this.props.navigation.navigate('UpdateProfile')}
             />
             <CustomIcon
               name={'logout'}
               size={40}
               color={'#1F5673'}
+              accessibilityLabel='logout'
               onPress={() => this.logout()}
             />
           </View>

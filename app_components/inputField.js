@@ -12,7 +12,7 @@ export default class CustomFormInput extends Component {
 
     render() {
         return (
-            <View>
+            <View accessible={true}>
                 <Text style={styles.label}> {this.props.labelTitle}</Text>
                 <TextInput
                     style={styles.form_input}
