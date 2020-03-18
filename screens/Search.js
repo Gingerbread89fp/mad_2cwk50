@@ -62,7 +62,7 @@ class Search extends Component{
                 "X-Authorization": JSON.parse(this.state.token)
             }})
         .then((response) => {
-            Alert.alert("user followed successfully ");
+            Alert.alert('user followed successfully');
             this.setState({isFollowed: true})
            
         })
@@ -79,7 +79,7 @@ class Search extends Component{
                 "X-Authorization": JSON.parse(this.state.token)
             }})
           .then((response) => {
-              Alert.alert("user unfollowed successfully ")
+              Alert.alert('user unfollowed successfully')
               this.setState({isFollowed: false})  
           })
           .catch((error)=>{

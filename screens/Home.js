@@ -3,6 +3,7 @@ import { FlatList, Text, View, Image } from 'react-native';
 import CustomIcon from '../app_components/customizedIconButton';
 
 import styles from '../styles/home_style'
+import AsyncStorage from '@react-native-community/async-storage';
 
 class Home extends Component {
 
@@ -10,6 +11,7 @@ class Home extends Component {
         super(props);
         this.state = {
             isLoading: true,
+            isLoggedIn: false,
             chitsList: [],
             uri:''
         }
@@ -25,12 +27,14 @@ class Home extends Component {
                     name={'message-text-outline'}
                     size={40}
                     color={'#1F5673'}
+                    accessibilityLabel='write new chit'
                     onPress={() => navigation.navigate('NewChits')}
                 />
                 <CustomIcon
                     name={'login'}
                     size={40}
                     color={'#1F5673'}
+                    accessibilityLabel='go to login'
                     onPress={() => navigation.navigate('Login')}
                 />
             </View>
@@ -38,22 +42,40 @@ class Home extends Component {
     });
 
     getChits() {
-        return fetch('http://10.0.2.2:3333/api/v0.0.5/chits')
-        .then((response) => response.json())
-        .then((responseJson) => {
-            this.setState({
-                isLoading: false,
-                chitsList: responseJson
-            })        
-        })
-        .then(()=>this.getChitPicture())
-        .catch((error) => {
-            console.log(error)
-        })
+        if(this.state.isLoggedIn){
+            return fetch('http://10.0.2.2:3333/api/v0.0.5/chits?count=30')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    isLoading: false,
+                    chitsList: responseJson
+                })        
+            })
+            .then(()=>this.getChitPicture())
+            .catch((error) => {
+                console.log(error)
+            })
+        }
+        else{
+            return fetch('http://10.0.2.2:3333/api/v0.0.5/chits')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    isLoading: false,
+                    chitsList: responseJson
+                })        
+            })
+            .then(()=>this.getChitPicture())
+            .catch((error) => {
+                console.log(error)
+            })
+        }
     }
 
-    //after retrieving the chits loop through all of them to extract the id and check if an image
-    //is associated to that chit
+    /**
+     * after retrieving the chits loop through all of them to extract the id and check if an image 
+     * is associated to that chit 
+     */
     getChitPicture(){
         this.state.chitsList.map((data) =>{
             return fetch('http://10.0.2.2:3333/api/v0.0.5/chits/'+data.chit_id+'/photo')
@@ -69,19 +91,20 @@ class Home extends Component {
     }
 
     displayChitsList(item) {
-        console.log('**** chit list ****', this.state.chitsList)
+        const {url, chit_content, chit_id} = item
+        const {given_name} = item.user
         return (
-            <View style={styles.chit_container} key={item.chit_id}>
+            <View style={styles.chit_container} key={chit_id}>
                 <CustomIcon
                     name={'account-circle-outline'}
                     size={40}
                     color={'#1F5673'}
                     />
                 <View style={styles.chit_content}>
-                    <Text style={styles.name_label}>{item.user.given_name}</Text>
-                    <Text style={styles.chit_text}>{item.chit_content}</Text>
+                    <Text style={styles.name_label}>{given_name}</Text>
+                    <Text style={styles.chit_text}>{chit_content}</Text>
                     
-                    <Image source={{uri: item.url, width: 100, height: 100}} />
+                    <Image source={{uri: url, width: 100, height: 100}} />
                     {item.location ? 
                         (<Text style={styles.chit_location}>Your Location: {item.location.latitude}, {item.location.longitude}</Text>) 
                         : null}
@@ -91,7 +114,12 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.getChits();
+        AsyncStorage.getItem('login', (err, res)=>{
+            this.setState({
+                isLoggedIn: res
+            })
+            this.getChits();
+        })
     }
 
     render() {

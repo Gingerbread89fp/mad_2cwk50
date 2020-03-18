@@ -53,7 +53,7 @@ class UpdateProfile extends Component{
       })
     })
     .then((response) => {
-      Alert.alert("Details updated successfully")
+      Alert.alert('Details updated successfully')
     })
     //re fetch the new user details so to be able to update the storage details
     .then(() => {return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.user_id)})

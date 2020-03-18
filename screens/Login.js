@@ -9,7 +9,8 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      user_id: ''
+      user_id: '',
+      isLoggedIn: false
     }
   }
 
@@ -30,12 +31,14 @@ class Login extends Component {
     .then((responseJson) => {
         this.setState({
             user_id: responseJson.id,
-            token: responseJson.token
+            token: responseJson.token,
+            isLoggedIn: true
         });
         AsyncStorage.setItem('token', JSON.stringify(responseJson.token));
-        AsyncStorage.setItem('userId', JSON.stringify(responseJson.id))
+        AsyncStorage.setItem('userId', JSON.stringify(responseJson.id));
+        AsyncStorage.setItem('login', JSON.stringify(this.state.isLoggedIn))
     })
-    .then((response) => {Alert.alert("Logged in successfully")})
+    .then((response) => {Alert.alert('Logged in successfully')})
     .then((response) => this.props.navigation.navigate('Home'))
     .then((response) => this.getUserDetails())
     .catch((error) => {

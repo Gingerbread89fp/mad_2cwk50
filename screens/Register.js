@@ -33,7 +33,7 @@ class Register extends Component{
       })
     })
     .then((response) => {
-      Alert.alert("Registered successfully")
+      Alert.alert('Registered successfully')
     })
     .then((response) => { this.props.navigation.navigate('Login')})
     .catch((error)=>{

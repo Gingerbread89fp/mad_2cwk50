@@ -7,7 +7,7 @@ import CustomIcon from '../app_components/customizedIconButton';
 
 import styles from '../styles/profile_style'
 
-var default_avatar= require('../assets/images/default_user.png')
+const default_avatar= require('../assets/images/default_user.png')
 
 class Profile extends Component {
 
@@ -31,7 +31,7 @@ class Profile extends Component {
   logout() {
     return fetch('http://10.0.2.2:3333/api/v0.0.5/logout')
       .then((response) => {
-        Alert.alert("Logged out successfully ");
+        Alert.alert('Logged out successfully');
         //clear the storage to avoid persistency of data after logout
         AsyncStorage.clear()
       })
@@ -138,21 +138,16 @@ class Profile extends Component {
   }
 
   uploadProfilePicture(img_selected){
-    const picData = new FormData();
-    picData.append('picture', {
-      uri: img_selected,
-      type: 'image/jpeg'
-    })
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user/photo', {
       method: 'POST',
       headers: { 
           "Content-Type": "image/jpeg", 
           "X-Authorization": JSON.parse(this.state.token)
       },
-      body: picData
+      body: img_selected
     })
     .then((response) => {
-        Alert.alert('Successful Action', 'Picture uploeaded correctly') 
+        Alert.alert('Successful Action', 'Picture uploaded correctly') 
         console.log(response) 
     })
     .catch((error)=>{
@@ -168,6 +163,7 @@ class Profile extends Component {
   
 
   render() {
+    const {given_name, family_name, email} = this.state.user_details
     return (
       <View style={{backgroundColor: '#B9B8D3'}} accessible={true}>
         
@@ -200,8 +196,7 @@ class Profile extends Component {
                   quality={70}
                   onPhotoSelect={img_selected =>{
                     if(img_selected){
-                      console.log('img selected', img_selected)
-                      this.uploadProfilePicture(img_selected.blob)
+                      this.uploadProfilePicture(img_selected)
                     }
                   }}
                 >
@@ -210,12 +205,11 @@ class Profile extends Component {
                       //if a profile pic is set than use that one otherwise keep the default image  
                       source={this.state.profile_pic ? {uri: this.state.profile_pic} : default_avatar}
                     />
-                    {console.log('profile pic', this.state.profile_pic)}
                 </PhotoUpload>
 
-                <Text style={styles.user_details_font}>First Name: {this.state.user_details.given_name}</Text>
-                <Text style={styles.user_details_font}>Last Name: {this.state.user_details.family_name}</Text>
-                <Text style={styles.user_details_font}>Email: {this.state.user_details.email}</Text>        
+                <Text style={styles.user_details_font}>First Name: {given_name}</Text>
+                <Text style={styles.user_details_font}>Last Name: {family_name}</Text>
+                <Text style={styles.user_details_font}>Email: {email}</Text>        
 
           </View>
 

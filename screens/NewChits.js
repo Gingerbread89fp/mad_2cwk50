@@ -6,8 +6,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Geolocation from '@react-native-community/geolocation';
 import CustomIcon from '../app_components/customizedIconButton';
 
-//as the number of draft will be minimum the warning had been suppressed allowing the use the ScrollView
-//to facilitate the movement towards the new content
+/**
+ * as the number of draft will be minimum the warning had been suppressed allowing the use the ScrollView 
+ * to facilitate the movement towards the new content
+ */
 YellowBox.ignoreWarnings([
   'VirtualizedLists should never be nested',
 ])
@@ -114,8 +116,8 @@ class NewChits extends Component {
     }
 
     deleteDraft(item){
-        var list = this.state.chit_drafts;
-        var position = list.indexOf(item);
+        const list = this.state.chit_drafts;
+        const position = list.indexOf(item);
         list.splice(position, 1)
         this.setState({chit_drafts: list})
         AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts))
@@ -129,7 +131,6 @@ class NewChits extends Component {
             chit_content:''
         })
         AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
-        //console.log('draft saved', this.state.chit_drafts)
         Alert.alert('Draft saved')
     }
 
