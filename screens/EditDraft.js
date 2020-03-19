@@ -69,7 +69,7 @@ class NewChits extends Component {
                                 })
                                 Alert.alert('Draft updated')
                                 AsyncStorage.setItem('chits', JSON.stringify(this.state.chit_drafts));
-                                this.props.navigation.navigate('NewChits')
+                                this.props.navigation.push('NewChits')
                             }}>
                             <Text>UPDATE DRAFT</Text>
                         </TouchableOpacity>

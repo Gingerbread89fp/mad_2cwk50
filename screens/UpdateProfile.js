@@ -14,7 +14,7 @@ class UpdateProfile extends Component{
         family_name: '',
         email: '',
         password: '',
-        user_id: ''
+        user_id: '',
     }
   }
 
@@ -61,7 +61,7 @@ class UpdateProfile extends Component{
     .then((responseJson)=>{
         AsyncStorage.setItem('user', JSON.stringify(responseJson))
     })
-    .then((response) => {this.props.navigation.navigate('Profile')})
+    .then((response) => {this.props.navigation.push('Profile')})
     .catch((error)=>{
       console.log(error)
     })

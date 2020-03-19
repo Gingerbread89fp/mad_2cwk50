@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Alert, FlatList } from 'react-native';
+import { Text, View, TextInput, Alert, FlatList, TouchableHighlightBase } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
 
 import styles from '../styles/search_style';
@@ -21,21 +21,20 @@ class Search extends Component{
         .then((response) => response.json())
         .then((responseJson) => {
             this.setState({
-                userList: responseJson
+                userList: responseJson,
             });
+        })
+        .then(() =>{
+            this.setState({
+                input_text:'',
+            })
         })
         .catch((error) => {
           console.log(error)
         })
     }
 
-    componentDidMount() {
-        this.searchUsers();
-        AsyncStorage.getItem('token', (err, result) =>{
-            this.setState({ token: result });
-        })
-    }
-
+    
     displayData(item){
         return(
             <View style={styles.user_list}>
@@ -47,45 +46,52 @@ class Search extends Component{
                     size={36} 
                     color={'#1F5673'} 
                     accessibilityLabel='add user to following list'
-                    onPress={() => this.followUser(item.user_id)} 
-                />
+                    onPress={() => {
+                        if(this.state.token !=null){
+                            this.followUser(item.user_id);
+                        }
+                        else{ this.displayAlertMessage() }
+                    }} />
             </View>
         )
     }
-
-
+    
+    displayAlertMessage(){
+        const { navigation } = this.props;
+        Alert.alert(
+            'Login error',
+            'Please login to follow other chitters',
+            [{text: 'Ok', onPress: () => navigation.navigate('Home')}]
+        )
+    }
+    
     followUser(user_id){
         return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+user_id+'/follow', {
             method: 'POST',
             headers: { 
                 "Content-Type": "application/json", 
                 "X-Authorization": JSON.parse(this.state.token)
-            }})
-        .then((response) => {
-            Alert.alert('user followed successfully');
-            this.setState({isFollowed: true})
-           
+        }})
+        .then(() => {
+            Alert.alert('Following','user followed successfully');
         })
         .catch((error)=>{
-        console.log(error)
+            console.log(error)
         })
     }
+        
+    componentDidMount() {
+        AsyncStorage.getItem('token', (err, result) =>{
+            this.setState({ token: result });
+        })
+        this.searchUsers();
+    }
 
-    unFollowUser(user_id){
-        return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+user_id+'/follow', {
-            method: 'DELETE',
-            headers: { 
-                "Content-Type": "application/json", 
-                "X-Authorization": JSON.parse(this.state.token)
-            }})
-          .then((response) => {
-              Alert.alert('user unfollowed successfully')
-              this.setState({isFollowed: false})  
-          })
-          .catch((error)=>{
-          console.log(error)
-          })
-      }
+    componentDidUpdate(prevState){
+        if(this.state.token != prevState.token){
+            this.searchUsers()
+        }
+    }
 
     render(){
         return(

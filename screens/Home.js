@@ -13,7 +13,7 @@ class Home extends Component {
             isLoading: true,
             isLoggedIn: false,
             chitsList: [],
-            uri:''
+            uri:'',
         }
     }
 
@@ -113,13 +113,17 @@ class Home extends Component {
         )
     }
 
-    componentDidMount() {
-        AsyncStorage.getItem('login', (err, res)=>{
+    async getLogin(){
+        await AsyncStorage.getItem('login', (err, res)=>{
             this.setState({
                 isLoggedIn: res
             })
             this.getChits();
         })
+    }
+
+    componentDidMount() {
+        this.getLogin()
     }
 
     render() {

@@ -25,7 +25,7 @@ class NewChits extends Component {
             chit_content: '',
             longitude: 0,
             latitude:0,
-            chit_drafts:[]
+            chit_drafts:[],
         }
     }
 
@@ -57,7 +57,7 @@ class NewChits extends Component {
             AsyncStorage.setItem('chitId', JSON.stringify(responseJson.chit_id));
             console.log('chitID ', responseJson.chit_id)
         })
-        .then((response) => this.props.navigation.navigate('Home'))
+        .then((response) => this.props.navigation.push('Home'))
         .catch((error) => {
             console.log(error)
         })
@@ -149,7 +149,7 @@ class NewChits extends Component {
             this.setState({token: result})
         })
         AsyncStorage.getItem('chits', (err, chit_r)=>{
-            if(chit_r != null){
+            if(chit_r != null && this.state.token !=null){
                 this.setState({
                     chit_drafts: JSON.parse(chit_r)
                 })

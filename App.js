@@ -28,7 +28,7 @@ const AppNavigator = createBottomTabNavigator({
       Camera,
       EditDraft,
       Login,
-      Register
+      Register,
     }),
     navigationOptions:{
       tabBarIcon:({tintColor})=>(<Octicons name='home' size={30} color={tintColor} />) 
@@ -37,7 +37,7 @@ const AppNavigator = createBottomTabNavigator({
   Profile:{
     screen: createStackNavigator({
       Profile,
-      UpdateProfile
+      UpdateProfile,
     }),
     navigationOptions:{
       tabBarIcon:({tintColor})=>(<Octicons name='person' size={30} color={tintColor} />) 
@@ -48,9 +48,8 @@ const AppNavigator = createBottomTabNavigator({
   initialRouteName: 'Home',
   tabBarOptions: {
     activeTintColor: '#1F5673',
-    inactiveTintColor: '#B9B8D3'
-}
-  
+    inactiveTintColor: '#B9B8D3',
+  }
 });
 
 

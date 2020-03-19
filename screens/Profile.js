@@ -33,7 +33,10 @@ class Profile extends Component {
       .then((response) => {
         Alert.alert('Logged out successfully');
         //clear the storage to avoid persistency of data after logout
-        AsyncStorage.clear()
+        AsyncStorage.removeItem('token') 
+        AsyncStorage.removeItem('userId')
+        AsyncStorage.removeItem('user')
+        AsyncStorage.removeItem('login')
       })
       .then((response) => this.props.navigation.navigate('Login'))
       .catch((error) => {
