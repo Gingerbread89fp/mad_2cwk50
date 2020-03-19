@@ -41,8 +41,9 @@ Few print screens from the application
 
 #### Code download and setup
 
-The code can be easily downloaded from GitHub.
-Using the terminal/command window:
+The code can be downloaded from GitHub.
+
+Use the terminal/command window and run:
 
 ```bash
 #clone code from repository:
@@ -57,19 +58,21 @@ $ npm install
 
 #### Android Studio setup
 
-Open Android studio import the android directory and build the project.
+Open Android studio import the android directory inside the mad_2cwk50 project and build it.
 The ADV (Android Virtual Device) used is a Pixel 2 with API 28 and Android 9.0.
 
 After the build had finished, start the AVD.
 
 #### Run emulator and app
 
-On command window inside the project directory run:
+On command window making sure you are still located inside the mad_2cwk50 directory run:
 
 ```bash
 $ react-native run-android
 ```
 It will open the metro bundler terminal and will install the app on the emulator.
+The app should be open automatically. If not look for "Chittr" between the app list of the emulator.
+
 
 ## Usage
 
@@ -86,3 +89,5 @@ Drafts can be updated, deleted or posted.
 Each user can also update their profile details and unfollow any of the other chitters they were previously following.
 
 ## Acknowledgements
+
+Thanks to the Chittr team for providing the API on which this app is built.
