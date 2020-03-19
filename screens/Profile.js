@@ -72,7 +72,6 @@ class Profile extends Component {
   getProfilePicture(){
     return fetch('http://10.0.2.2:3333/api/v0.0.5/user/'+this.state.user_id+'/photo')
     .then((response) =>{
-      console.log('pic', response)
       if(!response.status === 404 || !response.status === 500){
         this.setState({
           profile_pic: response.url
@@ -151,7 +150,6 @@ class Profile extends Component {
     })
     .then((response) => {
         Alert.alert('Successful Action', 'Picture uploaded correctly') 
-        console.log(response) 
     })
     .catch((error)=>{
       console.log(error)

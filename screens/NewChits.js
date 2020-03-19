@@ -55,7 +55,6 @@ class NewChits extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
             AsyncStorage.setItem('chitId', JSON.stringify(responseJson.chit_id));
-            console.log('chitID ', responseJson.chit_id)
         })
         .then((response) => this.props.navigation.push('Home'))
         .catch((error) => {
@@ -153,7 +152,6 @@ class NewChits extends Component {
                 this.setState({
                     chit_drafts: JSON.parse(chit_r)
                 })
-                console.log('drafts from storage', this.state.chit_drafts)
             }
         })  
     }
@@ -165,7 +163,6 @@ class NewChits extends Component {
                     this.setState({
                         chit_drafts: JSON.parse(chit_r)
                     })
-                    console.log('drafts from storage', this.state.chit_drafts)
                 }
             })  
         }
