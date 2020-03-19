@@ -14,23 +14,23 @@ A totally original, unique and non-plagiarised platform for microblogging. Users
 Few print screens from the application
 
 <img 
-    src='https://github.com/Gingerbread89fp/mad_2cwk50/tree/master/assets/gitImgs/login.png' 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/login.png' 
     width=20% 
 />
 <img 
-    src='https://github.com/Gingerbread89fp/mad_2cwk50/tree/master/assets/gitImgs/chits.png' 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/chits.png' 
     width=20% 
 />
 <img 
-    src='https://github.com/Gingerbread89fp/mad_2cwk50/tree/master/assets/gitImgs/search.png' 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/search.png' 
     width=20% 
 />
 <img 
-    src='https://github.com/Gingerbread89fp/mad_2cwk50/tree/master/assets/gitImgs/follow.png' 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/follow.png' 
     width=20% 
 />
 <img 
-    src='https://github.com/Gingerbread89fp/mad_2cwk50/tree/master/assets/gitImgs/profile.png' 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/profile.png' 
     width=20% 
 />
 
