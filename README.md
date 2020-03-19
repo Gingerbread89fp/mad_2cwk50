@@ -15,23 +15,23 @@ Few print screens from the application
 
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/login.png' 
-    width=20% 
+    width=15% 
 />
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/chits.png' 
-    width=20% 
+    width=15% 
 />
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/search.png' 
-    width=20% 
+    width=15% 
 />
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/follow.png' 
-    width=20% 
+    width=15% 
 />
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/profile.png' 
-    width=20% 
+    width=15% 
 />
 
 
