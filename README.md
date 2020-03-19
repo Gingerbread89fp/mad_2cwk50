@@ -1,8 +1,12 @@
 # CHITTR
 
-<img src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/images/appLogo.png' width=20%/>
+<img 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/images/appLogo.png' 
+    width=20% 
+    style='float: left; margin-right: 8'
+/>
 
-A totally original, unique and non-plagiarised platform for microblogging. Users who sign up for an account can publish ‘Chits’ – short, textual based posts of no more than 141 characters. Users can also follow their friends and peers to keep updated with what their friends are Chitting about.
+<p>A totally original, unique and non-plagiarised platform for microblogging. Users who sign up for an account can publish ‘Chits’ – short, textual based posts of no more than 141 characters. Users can also follow their friends and peers to keep updated with what their friends are Chitting about.</p>
 
 ## Installation
 
