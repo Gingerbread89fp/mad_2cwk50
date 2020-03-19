@@ -1,6 +1,11 @@
 # CHITTR
+---
+![Image](https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/images/appLogo.png)
+
+A totally original, unique and non-plagiarised platform for microblogging. Users who sign up for an account can publish ‘Chits’ – short, textual based posts of no more than 141 characters. Users can also follow their friends and peers to keep updated with what their friends are Chitting about.
 
 ## Installation
+---
 
 #### Code download and setup
 
@@ -25,26 +30,6 @@ The ADV (Android Virtual Device) used is a Pixel 2 with API 28 and Android 9.0.
 
 After the build had finished, start the AVD.
 
-
-#### Server setup
-
-If the server is not running yet enter manually the credential for connection with the database in the config > config.js file
-Open a new terminal window:
-
-```bash
-#enter the server directory
-$ cd chittr_server_v6
-
-#run the server
-$ npm start
-```
-On a command window inside the server directory run:
-
-```bash
-#create the tables in the database and populate them with initial data
-$ npm test
-```
-
 #### Run emulator and app
 
 On command window inside the project directory run:
@@ -55,6 +40,7 @@ $ react-native run-android
 It will open the metro bundler terminal and will install the app on the emulator.
 
 ## Usage
+---
 
 You can navigate through the app using the bottom tab navigation passing from the Home page to the Profile or Search.
 If no login is made actions enabled are limited and the user will be asked to login before posting Chits, viewing the profile or following other user for example.
@@ -66,3 +52,6 @@ Once registered and logged in the user can fully use the app viewing all Chits p
 Drafts can be updated, deleted or posted.
 
 Each user can also update their profile details and unfollow any of the other chitters they were previously following.
+
+## Acknowledgements
+---
