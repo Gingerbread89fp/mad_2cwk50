@@ -15,23 +15,23 @@ Few print screens from the application
 
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/login.png' 
-    width=15% 
+    width=18% alt='login screen'
 />
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/chits.png' 
-    width=15% 
+    width=18% alt='home page with random chits preview'
 />
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/search.png' 
-    width=15% 
+    width=18% alt='search page'
 />
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/follow.png' 
-    width=15% 
+    width=18% alt='follow user'
 />
 <img 
     src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImgs/profile.png' 
-    width=15% 
+    width=18% alt='profile page'
 />
 
 
