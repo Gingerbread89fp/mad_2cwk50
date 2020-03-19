@@ -8,6 +8,34 @@
 
 A totally original, unique and non-plagiarised platform for microblogging. Users who sign up for an account can publish ‘Chits’ – short, textual based posts of no more than 141 characters. Users can also follow their friends and peers to keep updated with what their friends are Chitting about.</p>
 
+
+## Visual
+
+Few print screens from the application
+
+<img 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImg/login.png' 
+    width=20% 
+/>
+<img 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImg/chits.png' 
+    width=20% 
+/>
+<img 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImg/search.png' 
+    width=20% 
+/>
+<img 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImg/follow.png' 
+    width=20% 
+/>
+<img 
+    src='https://github.com/Gingerbread89fp/mad_2cwk50/blob/master/assets/gitImg/profile.png' 
+    width=20% 
+/>
+
+
+
 ## Installation
 
 
